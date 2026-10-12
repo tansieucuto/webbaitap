@@ -1,0 +1,138 @@
+/* ==========================================================================
+   TỔ VÀNG — BASE.CSS (ÉLAN STUDIO AESTHETIC SYSTEM)
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background: var(--bg-main);
+  cursor: default;
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.8;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  cursor: default;
+  position: relative;
+}
+
+/* Subtle Noise Texture Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+textarea {
+  cursor: text;
+}
+
+select,
+label,
+.btn-small,
+.qty-btn,
+.btn-primary,
+.btn-secondary,
+.modal-close-btn,
+.cart-item-remove,
+.filter-btn,
+.payment-card {
+  cursor: pointer;
+}
+
+img, svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Vô hiệu hóa vĩnh viễn custom cursor để dùng con trỏ chuột hệ điều hành chuẩn */
+#cursor,
+#cursorRing {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Scroll Reveal Elements */
+.reveal,
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible,
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+

@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tổ Vàng — Mật Ong Rừng Hà Tĩnh · Est. 1952</title>
+
+  <!-- Google Fonts: Playfair Display, DM Mono, Syne -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/ecommerce.css">
+</head>
+<body class="has-demo-banner">
+<body>
+
+  <!-- TOP DEMO BANNER -->
+  <div class="demo-banner">
+    ✦ CHẾ ĐỘ THỬ NGHIỆM (DEMO MODE) — WEBSITE BÁN MẬT ONG RỪNG HÀ TĨNH · EST. 1952 ✦
+  </div>
+  <!-- CUSTOM CURSOR -->
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor"></div>
+  <div id="cursorRing"></div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html" class="nav-logo">Tổ<span>Vàng</span></a>
+    
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Trang Chủ</a></li>
+      <li><a href="products.html">Cửa Hàng</a></li>
+      <li><a href="#why">Triết Lý</a></li>
+      <li><a href="#origin">Nguồn Gốc</a></li>
+      <li><a href="#reviews">Đánh Giá</a></li>
+      <li><a href="#contact">Liên Hệ</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="cart.html" class="btn-nav-cart" id="btnNavCart" title="Xem giỏ hàng">
+        <span class="cart-label">Giỏ Hàng</span>
+        [<span class="cart-badge" id="cartBadge">0</span>]
+      </a>
+      <a href="products.html" class="nav-cta">Đặt Mật Ong</a>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">[ MENU ]</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Hương Khê, Hà Tĩnh — Est. 1952</p>
+      <h1 class="hero-title">
+        Mật ong rừng<br/><em>nguyên bản.</em>
+      </h1>
+      <p class="hero-sub">
+        Thu hoạch thủ công từ rừng già nguyên sinh Vũ Quang. Không pha trộn, không gia nhiệt — chắt chiu tinh hoa thảo mộc trăm hoa vào từng giọt mật sánh đặc thuần khiết.
+      </p>
+      <div class="hero-actions">
+        <a href="products.html" class="btn-primary">Xem Sản Phẩm</a>
+        <a href="#origin" class="btn-secondary">Câu Chuyện Nghề Ong →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span class="marquee-item">Mật Ong Rừng Hà Tĩnh</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Thu Hoạch Thủ Công</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Không Gia Nhiệt Dưới 35°C</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Kiểm Nghiệm Độc Lập</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Giữ Trọn Enzyme Sống</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Bao Bì Thủy Tinh Tinh Khiết</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Khai Thác Bền Vững</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Mật Ong Rừng Hà Tĩnh</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Thu Hoạch Thủ Công</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Không Gia Nhiệt Dưới 35°C</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Kiểm Nghiệm Độc Lập</span>
+      <span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">Giữ Trọn Enzyme Sống</span>
+      <span class="marquee-item marquee-sep">✦</span>
+    </div>
+  </div>
+
+  <!-- PRODUCTS SECTION -->
+  <section class="section" id="products">
+    <div class="section-header reveal">
+      <div>
+        <p class="section-label">Danh Mục Sản Phẩm</p>
+        <h2 class="section-title">Tuyển Chọn<br/><em style="font-family:'Playfair Display',serif; font-style:italic;">tinh túy</em></h2>
+      </div>
+      <p class="section-sub">
+        Mỗi mẻ mật mang sắc thái hương hoa đặc trưng theo từng mùa thu hoạch tại dải rừng Trường Sơn.
+      </p>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- Product 1: Mật Ong Rừng Đặc Biệt (Focal Hero Landscape Card) -->
+      <div class="product-card product-hero fade-in">
+        <img src="assets/images/honey-forest-wide.jpg" alt="Mật Ong Rừng Hà Tĩnh" class="product-card-img" loading="lazy">
+        <div class="product-card-overlay">
+          <h3 class="product-name">Mật Ong Rừng Hà Tĩnh</h3>
+          <div class="product-price">250.000đ <span>/ Chai 500ml</span></div>
+        </div>
+      </div>
+
+      <!-- Product 2: Mật Hoa Dại -->
+      <div class="product-card fade-in">
+        <img src="assets/images/honey-wildflower-jar.jpg" alt="Mật Hoa Dại Trăm Hoa" class="product-card-img" loading="lazy">
+        <div class="product-card-overlay">
+          <h3 class="product-name">Mật Hoa Dại Trăm Hoa</h3>
+          <div class="product-price">180.000đ <span>/ 250g</span></div>
+        </div>
+      </div>
+
+      <!-- Product 3: Mật Ong Khoái Cổ Thụ -->
+      <div class="product-card fade-in">
+        <img src="assets/images/honey-deep-ancient.jpg" alt="Mật Rừng Sâu Cổ Thụ" class="product-card-img" loading="lazy">
+        <div class="product-card-overlay">
+          <h3 class="product-name">Mật Rừng Sâu Cổ Thụ</h3>
+          <div class="product-price">240.000đ <span>/ 250g</span></div>
+        </div>
+      </div>
+
+      <!-- Product 4: Mật Hoa Chanh -->
+      <div class="product-card fade-in">
+        <img src="assets/images/honey-citrus-blossom.jpg" alt="Mật Hoa Rừng Cam Chanh" class="product-card-img" loading="lazy">
+        <div class="product-card-overlay">
+          <h3 class="product-name">Mật Hoa Rừng Cam Chanh</h3>
+          <div class="product-price">210.000đ <span>/ 250g</span></div>
+        </div>
+      </div>
+
+      <!-- Product 5: Mật Kem Tinh Khiết -->
+      <div class="product-card fade-in">
+        <img src="assets/images/honey-creamed-velvet.jpg" alt="Mật Hoa Kết Tinh Tự Nhiên" class="product-card-img" loading="lazy">
+        <div class="product-card-overlay">
+          <h3 class="product-name">Mật Hoa Kết Tinh Tự Nhiên</h3>
+          <div class="product-price">220.000đ <span>/ 300g</span></div>
+        </div>
+      </div>
+
+      <!-- Product 6: Hộp Quà Ba Mùa -->
+      <div class="product-card fade-in">
+        <img src="assets/images/honey-gift-box.jpg" alt="Bộ Ba Mùa Hoa Rừng" class="product-card-img" loading="lazy">
+        <div class="product-card-overlay">
+          <h3 class="product-name">Bộ Ba Mùa Hoa Rừng</h3>
+          <div class="product-price">580.000đ <span>/ Bộ 3 hũ</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHY US SECTION (ÉLAN SERVICES STYLE) -->
+  <section class="why-section" id="why">
+    <div class="reveal">
+      <p class="section-label">Triết Lý Nghề Ong</p>
+      <h2 class="section-title">Tiêu chuẩn<br/><em style="font-family:'Playfair Display',serif; font-style:italic;">nghiêm ngặt.</em></h2>
+    </div>
+
+    <div class="services-list reveal">
+      <div class="service-row">
+        <span class="service-num">01</span>
+        <span class="service-name">Không Gia Nhiệt</span>
+        <span class="service-tag">Chiết xuất lạnh nguyên bản dưới 35°C, bảo toàn enzyme sống, phấn hoa và vitamin tự nhiên.</span>
+      </div>
+
+      <div class="service-row">
+        <span class="service-num">02</span>
+        <span class="service-name">Kiểm Nghiệm Độc Lập</span>
+        <span class="service-tag">Từng mẻ mật đều được kiểm nghiệm độ ẩm dưới 18.5%, cam kết không kháng sinh hay phụ gia.</span>
+      </div>
+
+      <div class="service-row">
+        <span class="service-num">03</span>
+        <span class="service-name">Khai Thác Bền Vững</span>
+        <span class="service-tag">Luôn để lại lượng mật dồi dào cho đàn ong sinh tồn, bảo vệ cân bằng sinh thái rừng Trường Sơn.</span>
+      </div>
+
+      <div class="service-row">
+        <span class="service-num">04</span>
+        <span class="service-name">Bao Bì Thủy Tinh Vô Trùng</span>
+        <span class="service-tag">100% chai hũ thủy tinh trung tính và nắp gỗ tự nhiên, loại bỏ hoàn toàn bao bì nhựa độc hại.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGIN SECTION -->
+  <section class="origin-section" id="origin">
+    <div class="about-img reveal">
+      <img
+        src="assets/images/beekeeper-harvest.png"
+        alt="Người nuôi ong thu hoạch mật"
+        class="about-img-photo"
+      />
+      <div class="about-img-overlay"></div>
+      <p class="about-img-label">Hà Tĩnh · Vĩ Độ 18°N</p>
+    </div>
+
+    <div class="about-text reveal">
+      <p class="section-label">Nguồn Gốc & Di Sản</p>
+      <h2 class="section-title">Ba thế hệ chắt chiu<br/><em style="font-family:'Playfair Display',serif; font-style:italic;">vị ngọt núi rừng.</em></h2>
+      
+      <div class="about-body">
+        <p>
+          Khởi nguồn từ những cánh rừng nguyên sinh tại sườn núi Hương Khê từ năm 1952, nghề thu mật thô đã trở thành tâm huyết truyền đời của gia đình chúng tôi qua ba thế hệ.
+        </p>
+        <p>
+          Từng giọt mật ong Tổ Vàng được lắng lọc bằng phương pháp vải thô thủ công truyền thống kết hợp quy chuẩn an toàn thực phẩm khắt khe, mang trọn vẹn tinh hoa thảo mộc dâng tặng từng gia đình.
+        </p>
+      </div>
+
+      <div class="about-tags">
+        <span class="spec-tag">Rừng Vũ Quang</span>
+        <span class="spec-tag">Hương Khê</span>
+        <span class="spec-tag">Không Gia Nhiệt</span>
+        <span class="spec-tag">Enzyme Sống</span>
+        <span class="spec-tag">Chai Thủy Tinh</span>
+        <span class="spec-tag">Thủ Công</span>
+      </div>
+
+      <div class="stats-grid-row">
+        <div>
+          <div class="stat-val">70+</div>
+          <div class="stat-label">Năm Truyền Nghề</div>
+        </div>
+        <div>
+          <div class="stat-val">180</div>
+          <div class="stat-label">Điểm Tổ Tự Nhiên</div>
+        </div>
+        <div>
+          <div class="stat-val">100%</div>
+          <div class="stat-label">Mật Thô Nguyên Chất</div>
+        </div>
+        <div>
+          <div class="stat-val">12k+</div>
+          <div class="stat-label">Khách Hàng Đồng Hành</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS & REVIEWS SECTION -->
+  <section class="testimonials-section" id="reviews">
+    <div class="reveal">
+      <p class="section-label">Thẩm Định & Cảm Nhận</p>
+      <h2 class="section-title">Đánh giá thực tế</h2>
+    </div>
+
+    <!-- Summary Score Bar -->
+    <div class="reviews-summary-bar reveal">
+      <div class="reviews-score-badge">
+        <div class="score-number" id="reviewsAvgScore">5.0</div>
+        <div class="reviews-meta-block">
+          <span class="score-label">Điểm Đánh Giá</span>
+          <span class="reviews-count-text" id="reviewsTotalCount">3 đánh giá đã xác thực</span>
+        </div>
+      </div>
+      <button class="btn-write-review" id="btnOpenReviewModal">
+        Gửi Đánh Giá Của Bạn →
+      </button>
+    </div>
+
+    <!-- Reviews Grid -->
+    <div class="testimonials-grid reveal" id="reviewsGrid">
+      <!-- Sẽ được nạp động bởi js/reviews.js -->
+    </div>
+  </section>
+
+  <!-- CONTACT & CTA SECTION -->
+  <section class="contact" id="contact">
+    <div class="contact-inner reveal">
+      <p class="section-label">Trải Nghiệm Hương Vị Rừng Già</p>
+      <h2 class="section-title">
+        Thưởng thức mật ong<br/><em style="font-family:'Playfair Display',serif; font-style:italic;">thực sự thuần khiết.</em>
+      </h2>
+      <a href="#products" class="contact-link">Khám Phá Toàn Bộ Bộ Sưu Tập →</a>
+      
+      <div class="contact-meta-row">
+        <span class="contact-meta-item">Giao Hàng Toàn Quốc</span>
+        <span class="contact-meta-item">Miễn Phí Từ 500.000đ</span>
+        <span class="contact-meta-item">Cam Kết 100% Hài Lòng</span>
+        <span class="contact-meta-item">Hotline: 098.123.4567</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-copy">© 2026 TỔ VÀNG STUDIO. MẬT ONG RỪNG HÀ TĨNH. ALL RIGHTS RESERVED.</p>
+    <a href="#" class="footer-back">Lên đầu trang ↑</a>
+  </footer>
+
+  <!-- REVIEW MODAL -->
+  <div class="modal-overlay" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="modalReviewTitle">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="btnCloseReviewModal" aria-label="Đóng">[ ĐÓNG ]</button>
+      <h3 class="modal-title" id="modalReviewTitle">Đánh Giá Sản Phẩm</h3>
+      <p class="modal-sub">Chia sẻ thẩm định thực tế của bạn về Mật ong rừng Hà Tĩnh — Tổ Vàng</p>
+
+      <div class="form-message" id="reviewFormMsg"></div>
+
+      <form id="reviewForm">
+        <input type="hidden" id="reviewRatingInput" value="5">
+
+        <div class="form-group">
+          <label>Mức độ hài lòng (1 - 5)</label>
+          <div class="star-picker" id="starPicker">
+            <button type="button" class="star-btn active" data-value="1">1</button>
+            <button type="button" class="star-btn active" data-value="2">2</button>
+            <button type="button" class="star-btn active" data-value="3">3</button>
+            <button type="button" class="star-btn active" data-value="4">4</button>
+            <button type="button" class="star-btn active" data-value="5">5</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reviewNameInput">Họ và tên người đánh giá</label>
+          <input type="text" id="reviewNameInput" class="form-input" placeholder="Ví dụ: Nguyễn Văn A" maxlength="100">
+        </div>
+
+        <div class="form-group">
+          <label for="reviewContentInput">Nội dung đánh giá chi tiết *</label>
+          <textarea id="reviewContentInput" class="form-textarea" placeholder="Cảm nhận về hương vị, độ sánh, bao bì đóng gói hoặc dịch vụ..." maxlength="1000" required></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary-flat" id="btnCancelReview">Hủy Bỏ</button>
+          <button type="submit" class="btn-primary" id="btnSubmitReview">Gửi Đánh Giá</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3>Giỏ Hàng</h3>
+        <button class="modal-close-btn" id="btnCloseCartDrawer" style="position: static;" aria-label="Đóng">[ ĐÓNG ]</button>
+      </div>
+
+      <div class="cart-body" id="cartDrawerBody">
+        <!-- Render danh sách sản phẩm bởi js/cart.js -->
+      </div>
+
+      <div class="cart-footer">
+        <div class="cart-shipping-bar">
+          <div class="cart-shipping-progress" id="cartShippingProgress"></div>
+        </div>
+        <div class="cart-shipping-text" id="cartShippingNotice">
+          Mua thêm 500.000đ để được miễn phí vận chuyển
+        </div>
+
+        <div class="cart-subtotal-row">
+          <span>Tổng Cộng</span>
+          <span class="cart-subtotal-price" id="cartSubtotal">0đ</span>
+        </div>
+
+        <button class="btn-checkout" id="btnCheckout">Tiến Hành Đặt Hàng</button>
+        <a href="cart.html" style="display:block; text-align:center; margin-top:0.6rem; padding:0.75rem; border:1px solid rgba(201,168,76,0.35); font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--cream); text-decoration:none; background:rgba(20,16,12,0.85); transition:all 0.2s;">Xem Chi Tiết Trang Giỏ Hàng →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL (LOGIN / REGISTER / FORGOT) -->
+  <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="modalAuthTitle">
+    <div class="modal-box" style="max-width: 480px;">
+      <button class="modal-close-btn" id="btnCloseAuthModal" aria-label="Đóng">[ ĐÓNG ]</button>
+      <h3 class="modal-title" id="modalAuthTitle">Tài Khoản</h3>
+      <p class="modal-sub">Trải nghiệm mật ong rừng nguyên bản cùng Tổ Vàng</p>
+
+      <div class="modal-tabs">
+        <button type="button" class="modal-tab-btn active" data-tab="login">Đăng Nhập</button>
+        <button type="button" class="modal-tab-btn" data-tab="register">Đăng Ký</button>
+        <button type="button" class="modal-tab-btn" data-tab="forgot">Khôi Phục Tài Khoản</button>
+      </div>
+
+      <!-- TAB LOGIN -->
+      <div id="authTabLogin">
+        <div class="form-message" id="authLoginMsg"></div>
+        <form id="authLoginForm">
+          <div class="form-group">
+            <label for="loginEmailInput">Email *</label>
+            <input type="email" id="loginEmailInput" class="form-input" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPasswordInput">Mật khẩu *</label>
+            <input type="password" id="loginPasswordInput" class="form-input" placeholder="Tối thiểu 10 ký tự" required>
+          </div>
+
+
+          <div class="modal-actions">
+            <button type="submit" class="btn-primary" style="width:100%;">ĐĂNG NHẬP</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TAB REGISTER -->
+      <div id="authTabRegister" style="display:none;">
+        <div class="form-message" id="authRegMsg"></div>
+        <form id="authRegisterForm">
+          <div class="form-group">
+            <label for="regNameInput">Họ và tên *</label>
+            <input type="text" id="regNameInput" class="form-input" placeholder="Nguyễn Văn A" required>
+          </div>
+          <div class="form-group">
+            <label for="regEmailInput">Địa chỉ Email *</label>
+            <input type="email" id="regEmailInput" class="form-input" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="regPhoneInput">Số điện thoại</label>
+            <input type="tel" id="regPhoneInput" class="form-input" placeholder="0901234567">
+          </div>
+          <div class="form-group">
+            <label for="regPasswordInput">Mật khẩu (Tối thiểu 10 ký tự) *</label>
+            <input type="password" id="regPasswordInput" class="form-input" placeholder="••••••••••" minlength="10" required>
+          </div>
+          <div class="form-checkbox-row">
+            <input type="checkbox" id="regPrivacyInput" required>
+            <label for="regPrivacyInput">Tôi đồng ý với <a href="#why" style="color:var(--rust); text-decoration:underline;">Chính sách quyền riêng tư</a> và điều khoản mua sắm của Tổ Vàng.</label>
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="btn-primary" style="width:100%;">TẠO TÀI KHOẢN</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TAB FORGOT / RECOVER -->
+      <div id="authTabForgot" style="display:none;">
+        <div class="form-message" id="authForgotMsg"></div>
+
+        <!-- Section 1: Gửi yêu cầu đặt lại mật khẩu -->
+        <div id="forgotPasswordSubSection">
+          <p style="font-size:0.85rem; color:#666; margin-bottom:1rem; line-height:1.5;">
+            Nhập email tài khoản để nhận liên kết đặt lại mật khẩu (hiệu lực trong 30 phút).
+          </p>
+          <form id="authForgotForm">
+            <div class="form-group">
+              <label for="forgotEmailInput">Nhập email tài khoản của bạn *</label>
+              <input type="email" id="forgotEmailInput" class="form-input" placeholder="name@example.com" required>
+            </div>
+            <div class="modal-actions" style="margin-top:1rem;">
+              <button type="submit" class="btn-primary" style="width:100%;">GỬI LIÊN KẾT ĐẶT LẠI MẬT KHẨU</button>
+            </div>
+          </form>
+
+          <div style="margin-top: 0.8rem; text-align: center;">
+            <a href="javascript:void(0)" id="btnOpenManualReset" style="font-size:0.75rem; color:var(--rust); text-decoration:underline;">
+              Bạn đã nhận được mã xác thực trong email? Bấm vào đây để nhập mã
+            </a>
+          </div>
+
+          <div style="margin-top:1.2rem; padding-top:1rem; border-top:1px dashed var(--mist);">
+            <p style="font-size:0.8rem; font-weight:600; color:var(--dark); margin-bottom:0.4rem;">
+              Quên email đăng nhập? Tìm lại tài khoản qua SĐT:
+            </p>
+            <form id="authFindAccountForm" style="display:flex; gap:0.5rem;">
+              <input type="tel" id="findAccountPhoneInput" class="form-input" placeholder="Nhập SĐT (ví dụ: 0984880467)" style="flex:1;" required>
+              <button type="submit" class="btn-secondary" style="white-space:nowrap; padding:0.6rem 0.9rem; font-size:0.75rem;">TÌM TÀI KHOẢN</button>
+            </form>
+            <div id="findAccountResult" style="margin-top:0.6rem; font-size:0.82rem; display:none; padding:0.6rem; border-radius:4px;"></div>
+          </div>
+        </div>
+
+        <!-- Section 2: Nhập mật khẩu mới với token -->
+        <div id="resetPasswordSubSection" style="display:none; margin-top:0.5rem;">
+          <h4 style="font-family:var(--font-serif); font-size:1.1rem; color:var(--dark); margin-bottom:0.4rem;">
+            Đặt Lại Mật Khẩu Mới
+          </h4>
+          <p style="font-size:0.8rem; color:#666; margin-bottom:1rem; line-height:1.4;">
+            Mã xác thực có hiệu lực trong 30 phút. Mọi phiên đăng nhập cũ sẽ tự động đăng xuất sau khi đổi mật khẩu.
+          </p>
+          <form id="authResetPasswordForm">
+            <div class="form-group">
+              <label for="resetTokenInput">Mã xác thực (Token) *</label>
+              <input type="text" id="resetTokenInput" class="form-input" placeholder="Nhập mã xác thực" required>
+            </div>
+            <div class="form-group">
+              <label for="resetNewPasswordInput">Mật khẩu mới (Tối thiểu 10 ký tự) *</label>
+              <input type="password" id="resetNewPasswordInput" class="form-input" placeholder="••••••••••" minlength="10" required>
+            </div>
+            <div class="form-group">
+              <label for="resetConfirmPasswordInput">Xác nhận mật khẩu mới *</label>
+              <input type="password" id="resetConfirmPasswordInput" class="form-input" placeholder="••••••••••" minlength="10" required>
+            </div>
+            <div class="modal-actions" style="display:flex; gap:0.5rem; margin-top:1rem;">
+              <button type="button" class="btn-secondary" id="btnBackToForgot" style="flex:1;">← QUAY LẠI</button>
+              <button type="submit" class="btn-primary" style="flex:2;">LƯU MẬT KHẨU MỚI</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PRODUCT DETAIL MODAL (A2) -->
+  <div class="modal-overlay" id="productDetailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="modal-box" style="max-width: 820px;">
+      <button class="modal-close-btn" id="btnCloseProductModal" aria-label="Đóng">[ ĐÓNG ]</button>
+      
+      <div class="product-detail-layout">
+        <div>
+          <div class="detail-img-wrap">
+            <img id="detailImg" src="assets/images/honey-forest-wide.jpg" alt="Mật ong rừng">
+          </div>
+        </div>
+
+        <div>
+          <span class="detail-meta-tag" id="detailOriginTag">Hà Tĩnh · Est. 1952</span>
+          <h2 class="detail-title" id="detailTitle">Mật Ong Rừng Hà Tĩnh</h2>
+          
+          <div class="detail-rating-row" id="detailRating">
+            ★ 5.0 · (3 lượt thẩm định thực tế)
+          </div>
+
+          <div class="detail-price-box">
+            <span class="detail-price" id="detailPrice">250.000đ</span>
+            <span class="detail-stock-badge" id="detailStockBadge">Còn hàng</span>
+          </div>
+
+          <p id="detailDesc" style="font-family:var(--font-serif); font-size:0.95rem; color:#4a453f; line-height:1.7; margin-bottom:1.2rem;">
+            Thu hoạch thủ công từ rừng già nguyên sinh Vũ Quang. Không pha trộn, không gia nhiệt.
+          </p>
+
+          <span class="variant-selector-label">Lựa chọn quy cách đóng gói:</span>
+          <div class="variant-buttons" id="detailVariantButtons">
+            <!-- Render variants dynamically -->
+          </div>
+
+          <div class="form-group" style="margin-bottom:1rem;">
+            <label>Số lượng đặt mua:</label>
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+              <button type="button" class="qty-btn" id="btnDetailQtyMinus" style="width:32px; height:32px;">-</button>
+              <input type="number" id="detailQtyInput" value="1" min="1" max="10" readonly style="width:50px; text-align:center; font-family:var(--font-mono); font-weight:bold; border:1px solid var(--mist); background:var(--cream); padding:0.4rem;">
+              <button type="button" class="qty-btn" id="btnDetailQtyPlus" style="width:32px; height:32px;">+</button>
+            </div>
+          </div>
+
+          <table class="specs-table">
+            <tr>
+              <td>Xuất xứ</td>
+              <td id="specOrigin">Vườn Quốc Gia Vũ Quang, Hà Tĩnh</td>
+            </tr>
+            <tr>
+              <td>Thành phần</td>
+              <td id="specIngredients">100% mật ong rừng thô</td>
+            </tr>
+            <tr>
+              <td>Hạn sử dụng</td>
+              <td id="specShelfLife">24 tháng kể từ ngày mở nắp</td>
+            </tr>
+            <tr>
+              <td>Số tự công bố</td>
+              <td id="specDeclaration">CB-1952-HT/2026</td>
+            </tr>
+            <tr>
+              <td>Lưu ý sử dụng</td>
+              <td id="specWarning" style="color:#b84c2d; font-weight:600;">Không dùng cho trẻ dưới 1 tuổi.</td>
+            </tr>
+          </table>
+
+          <div class="safety-warning-box">
+            <strong>⚠️ Lưu ý y khoa:</strong> Không sử dụng mật ong cho trẻ sơ sinh và trẻ nhỏ dưới 1 tuổi do hệ tiêu hóa của trẻ chưa hoàn thiện để dung nạp các vi khuẩn tự nhiên có trong mật thô nguyên chất.
+          </div>
+
+          <button type="button" class="btn-primary" id="btnDetailAddToCart" style="width:100%; padding:0.95rem; font-size:0.75rem;">
+            THÊM VÀO GIỎ HÀNG
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL (C2) -->
+  <div class="modal-overlay" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="modalCheckoutTitle">
+    <div class="modal-box" style="max-width: 860px;">
+      <button class="modal-close-btn" id="btnCloseCheckoutModal" aria-label="Đóng">[ ĐÓNG ]</button>
+      <h3 class="modal-title" id="modalCheckoutTitle">Thanh Toán Đơn Hàng</h3>
+      <p class="modal-sub">Hoàn tất thông tin nhận hàng và phương thức thanh toán an toàn</p>
+
+      <div class="form-message" id="checkoutMsg"></div>
+
+      <form id="checkoutForm">
+        <div class="checkout-grid">
+          <!-- Cột thông tin nhận hàng & phương thức thanh toán -->
+          <div>
+            <h4 style="font-family:var(--font-serif); font-size:1.15rem; margin-bottom:1rem; border-bottom:1px solid #d5cebf; padding-bottom:0.4rem; color:#0d0c0a; font-weight:700;">
+              1. Địa Chỉ Nhận Hàng
+            </h4>
+
+            <div class="form-group">
+              <label for="checkoutRecipientName" style="color:#2b2824; font-weight:700;">Họ và tên người nhận *</label>
+              <input type="text" id="checkoutRecipientName" class="form-input" style="background:#fff; color:#0d0c0a; border:1px solid #c8c0b2; font-weight:500;" placeholder="Nguyễn Văn A" required>
+            </div>
+
+            <div class="form-group">
+              <label for="checkoutPhone" style="color:#2b2824; font-weight:700;">Số điện thoại nhận hàng *</label>
+              <input type="tel" id="checkoutPhone" class="form-input" style="background:#fff; color:#0d0c0a; border:1px solid #c8c0b2; font-weight:500;" placeholder="0901234567" required>
+            </div>
+
+            <div class="form-group">
+              <label for="checkoutAddress" style="color:#2b2824; font-weight:700;">Địa chỉ giao hàng chi tiết *</label>
+              <textarea id="checkoutAddress" class="form-textarea" style="background:#fff; color:#0d0c0a; border:1px solid #c8c0b2; min-height:70px; font-weight:500;" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="checkoutNote" style="color:#2b2824; font-weight:700;">Ghi chú cho đơn vị giao hàng (tùy chọn)</label>
+              <input type="text" id="checkoutNote" class="form-input" style="background:#fff; color:#0d0c0a; border:1px solid #c8c0b2; font-weight:500;" placeholder="Ví dụ: Giao giờ hành chính, gọi trước khi đến...">
+            </div>
+
+            <h4 style="font-family:var(--font-serif); font-size:1.15rem; margin:1.5rem 0 1rem; border-bottom:1px solid #d5cebf; padding-bottom:0.4rem; color:#0d0c0a; font-weight:700;">
+              2. Phương Thức Thanh Toán
+            </h4>
+
+            <div class="payment-methods-group">
+              <label class="payment-method-card selected">
+                <input type="radio" name="payment_method" value="bank_transfer" checked>
+                <div class="payment-method-info">
+                  <h5 style="color:#0d0c0a; font-weight:700;">Chuyển Khoản Ngân Hàng (VietQR Tự Động)</h5>
+                  <p style="color:#3e3831;">Mã QR chuẩn quốc gia tạo tự động kèm số tiền và mã đơn. Xử lý và xác nhận đơn ngay khi chuyển khoản.</p>
+                </div>
+              </label>
+
+              <label class="payment-method-card">
+                <input type="radio" name="payment_method" value="cod">
+                <div class="payment-method-info">
+                  <h5 style="color:#0d0c0a; font-weight:700;">Thanh Toán Khi Nhận Hàng (COD)</h5>
+                  <p style="color:#3e3831;">Kiểm tra gói hàng trước khi thanh toán tiền mặt cho nhân viên chuyển phát (Áp dụng tối đa 2 đơn chờ xác nhận).</p>
+                </div>
+              </label>
+
+              <label class="payment-method-card">
+                <input type="radio" name="payment_method" value="vnpay">
+                <div class="payment-method-info">
+                  <h5 style="color:#0d0c0a; font-weight:700;">Cổng Thanh Toán VNPay (Sandbox Demo)</h5>
+                  <p style="color:#3e3831;">Hỗ trợ thẻ ATM nội địa, thẻ Visa/Mastercard, ví VNPay điện tử an toàn.</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Cột tóm tắt đơn hàng -->
+          <div>
+            <div class="checkout-summary-box" style="background:#ffffff; border:1px solid #d5cebf; padding:1.5rem; color:#0d0c0a; border-radius:3px;">
+              <div class="checkout-summary-title" style="color:#0d0c0a; font-weight:700; border-bottom:1px solid #d5cebf;">Tóm Tắt Đơn Hàng</div>
+              <div id="checkoutItemsList" style="max-height:220px; overflow-y:auto; margin-bottom:1rem; border-bottom:1px solid #d5cebf; padding-bottom:0.6rem;">
+                <!-- Render items dynamically -->
+              </div>
+
+              <div class="checkout-row">
+                <span style="color:#4a453f; font-weight:500;">Tiền hàng</span>
+                <span id="checkoutSubtotal" style="color:#0d0c0a; font-weight:700;">0đ</span>
+              </div>
+              <div class="checkout-row">
+                <span style="color:#4a453f; font-weight:500;">Phí vận chuyển toàn quốc</span>
+                <span id="checkoutShippingFee" style="color:#0d0c0a; font-weight:700;">30.000đ</span>
+              </div>
+              <div class="checkout-row total">
+                <span style="color:#0d0c0a; font-weight:700;">Tổng Thanh Toán</span>
+                <span id="checkoutTotal" style="color:#b84c2d; font-weight:800; font-size:1.5rem;">0đ</span>
+              </div>
+
+              <div style="font-family:var(--font-mono); font-size:0.68rem; color:#4a453f; line-height:1.5; margin-top:1rem; border-top:1px dashed #d5cebf; padding-top:0.8rem;">
+                ✦ Miễn phí vận chuyển toàn quốc cho đơn hàng từ 500.000đ.<br/>
+                ✦ Cam kết 100% mật ong rừng thô nguyên bản từ Hà Tĩnh.
+              </div>
+
+              <button type="submit" class="btn-checkout" id="btnSubmitOrder" style="margin-top:1.2rem; width:100%; background:#0d0c0a; color:#f5f0e8; font-weight:bold;">
+                XÁC NHẬN ĐẶT HÀNG
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ORDER CONFIRMATION & VIETQR MODAL (C5) -->
+  <div class="modal-overlay" id="orderConfirmationModal" role="dialog" aria-modal="true" aria-labelledby="modalConfirmTitle">
+    <div class="modal-box" style="max-width: 620px; text-align: center;">
+      <button class="modal-close-btn" id="btnCloseConfirmModal" aria-label="Đóng">[ ĐÓNG ]</button>
+      <div style="font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:0.5rem;">
+        ✦ ĐẶT HÀNG THÀNH CÔNG ✦
+      </div>
+      <h3 class="modal-title" id="modalConfirmTitle">Mã Đơn: <span id="confirmOrderCode" style="color:var(--rust);">TV-XXXXXXXX</span></h3>
+      <p class="modal-sub">Tổng tiền cần thanh toán: <strong id="confirmOrderTotal" style="color:var(--ink); font-size:1.1rem;">0đ</strong></p>
+
+      <!-- KHỐI VIETQR NẾU CHỌN CHUYỂN KHOẢN -->
+      <div id="confirmVietQRBlock" class="vietqr-card">
+        <h4 style="font-family:var(--font-serif); font-size:1.15rem; margin-bottom:0.4rem; color:#0d0c0a; font-weight:700;">Quét Mã VietQR Để Thanh Toán</h4>
+        <p style="font-family:var(--font-mono); font-size:0.68rem; color:#3e3831; margin-bottom:0.8rem;">
+          Mở App Ngân hàng bất kỳ để quét mã QR có sẵn số tiền và mã đơn
+        </p>
+
+        <img id="qrImage" src="" alt="Mã VietQR Thanh Toán" class="vietqr-img">
+
+        <div class="bank-info-grid">
+          <div class="bank-info-item">
+            <label>Ngân hàng nhận</label>
+            <span id="qrBankName">Vietcombank</span>
+          </div>
+          <div class="bank-info-item">
+            <label>Số tài khoản</label>
+            <span><strong id="qrAccountNo">1023456789</strong> <button type="button" class="copy-badge-btn" id="btnCopyAccountNo">Sao Chép</button></span>
+          </div>
+          <div class="bank-info-item">
+            <label>Tên chủ tài khoản</label>
+            <span id="qrAccountName">CONG TY TO VANG VIET NAM</span>
+          </div>
+          <div class="bank-info-item">
+            <label>Số tiền chính xác</label>
+            <span id="qrAmount" style="color:var(--rust); font-weight:700;">0đ</span>
+          </div>
+          <div class="bank-info-item" style="grid-column: 1 / -1;">
+            <label>Nội dung chuyển khoản (bắt buộc)</label>
+            <span><strong id="qrMemo" style="color:var(--rust);">TV-XXXXXXXX</strong> <button type="button" class="copy-badge-btn" id="btnCopyMemo">Sao Chép</button></span>
+          </div>
+        </div>
+
+        <div style="font-family:var(--font-mono); font-size:0.68rem; color:#4a453f; line-height:1.6;">
+          * Hệ thống giữ hàng trong 24 giờ. Đơn hàng sẽ tự động chuyển sang trạng thái <strong>"Đã xác nhận"</strong> ngay khi tiền vào tài khoản.
+        </div>
+
+        <div style="margin-top:1.2rem; padding-top:1rem; border-top:1px dashed var(--gold);">
+          <button type="button" class="btn-primary" id="btnModalDemoPay" style="background:#2e7d32; border-color:#2e7d32; padding:0.75rem 1.4rem; font-size:0.75rem; font-weight:bold; cursor:pointer; box-shadow:0 4px 10px rgba(46,125,50,0.25);">
+            ⚡ [DEMO TEST] Giả Lập Đã Quét QR & Thanh Toán Thành Công
+          </button>
+        </div>
+      </div>
+
+      <!-- KHỐI COD -->
+      <div id="confirmCodBlock" style="display:none; background:var(--cream); color:#0d0c0a; border:1px solid var(--mist); padding:1.5rem; margin:1.5rem 0; font-family:var(--font-mono); font-size:0.75rem; text-align:left; line-height:1.7;">
+        <strong style="color:#0d0c0a; font-size:0.85rem;">✦ Đơn hàng thanh toán khi nhận hàng (COD) đã được tiếp nhận.</strong><br/>
+        <span style="color:#3e3831;">Nhân viên Tổ Vàng sẽ liên hệ theo số điện thoại của bạn trong vòng 2 giờ làm việc để xác nhận đơn và bàn giao cho bưu cục vận chuyển.</span>
+      </div>
+
+      <div class="modal-actions" style="justify-content:center; gap:1rem;">
+        <button type="button" class="btn-secondary-flat" id="btnConfirmContinueShopping">Tiếp Tục Mua Sắm</button>
+        <button type="button" class="btn-primary" id="btnConfirmViewOrders">Xem Đơn Hàng Của Tôi →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCOUNT & ORDERS MODAL (B5, B6, C7, D1-D3) -->
+  <div class="modal-overlay" id="accountModal" role="dialog" aria-modal="true" aria-labelledby="modalAccountTitle">
+    <div class="modal-box" style="max-width: 760px;">
+      <button class="modal-close-btn" id="btnCloseAccountModal" aria-label="Đóng">[ ĐÓNG ]</button>
+      <h3 class="modal-title" id="modalAccountTitle">Tài Khoản & Đơn Hàng</h3>
+      <p class="modal-sub">Quản lý lịch sử đặt hàng, sổ địa chỉ và dữ liệu cá nhân</p>
+
+      <div class="modal-tabs">
+        <button type="button" class="modal-tab-btn account-tab-btn active" data-tab="orders">Đơn Hàng Của Tôi</button>
+        <button type="button" class="modal-tab-btn account-tab-btn" data-tab="profile">Hồ Sơ & Sổ Địa Chỉ</button>
+        <button type="button" class="modal-tab-btn account-tab-btn" data-tab="privacy">Quyền Dữ Liệu Cá Nhân</button>
+      </div>
+
+      <!-- TAB ĐƠN HÀNG -->
+      <div id="accountTabOrders">
+        <div id="userOrdersList" style="max-height: 480px; overflow-y: auto;">
+          <!-- Nạp động bởi js/account.js -->
+        </div>
+      </div>
+
+      <!-- TAB HỒ SƠ & ĐỊA CHỈ -->
+      <div id="accountTabProfile" style="display:none;">
+        <form id="userProfileForm" style="margin-bottom:2rem; border-bottom:1px solid var(--mist); padding-bottom:1.5rem;">
+          <h4 style="font-family:var(--font-serif); font-size:1.1rem; margin-bottom:1rem;">Thông Tin Cá Nhân</h4>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="profileFullName">Họ và tên</label>
+              <input type="text" id="profileFullName" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="profileEmail">Địa chỉ Email</label>
+              <input type="email" id="profileEmail" class="form-input" readonly disabled style="opacity:0.6;">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="profilePhone">Số điện thoại</label>
+            <input type="tel" id="profilePhone" class="form-input">
+          </div>
+          <button type="submit" class="btn-primary" style="padding:0.6rem 1.4rem; font-size:0.68rem;">LƯU THAY ĐỔI HỒ SƠ</button>
+        </form>
+
+        <h4 style="font-family:var(--font-serif); font-size:1.1rem; margin-bottom:1rem;">Sổ Địa Chỉ Giao Hàng</h4>
+        <div id="addressBookList" style="margin-bottom:1.5rem;">
+          <!-- Nạp động -->
+        </div>
+
+        <form id="newAddressForm" style="background:var(--cream); padding:1.2rem; border:1px solid var(--mist);">
+          <h5 style="font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.8rem; color:var(--ink);">+ Thêm Địa Chỉ Mới</h5>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem;">
+            <input type="text" id="newAddrName" class="form-input" placeholder="Tên người nhận *" required>
+            <input type="tel" id="newAddrPhone" class="form-input" placeholder="Số điện thoại *" required>
+          </div>
+          <div style="margin-top:0.8rem;">
+            <input type="text" id="newAddrStreet" class="form-input" placeholder="Số nhà, tên đường, phường/xã *" required>
+          </div>
+          <div style="margin-top:0.8rem;">
+            <input type="text" id="newAddrProvince" class="form-input" placeholder="Tỉnh / Thành phố *" required>
+          </div>
+          <div class="form-checkbox-row">
+            <input type="checkbox" id="newAddrDefault" checked>
+            <label for="newAddrDefault">Đặt làm địa chỉ nhận hàng mặc định</label>
+          </div>
+          <button type="submit" class="btn-small" style="margin-top:0.6rem;">Lưu Địa Chỉ Mới</button>
+        </form>
+      </div>
+
+      <!-- TAB QUYỀN DỮ LIỆU CÁ NHÂN (D1, D2, D3) -->
+      <div id="accountTabPrivacy" style="display:none; font-family:var(--font-mono); font-size:0.75rem; line-height:1.7;">
+        <h4 style="font-family:var(--font-serif); font-size:1.1rem; margin-bottom:0.8rem; color:var(--ink);">Quyền Riêng Tư & Dữ Liệu Cá Nhân Của Bạn</h4>
+        <p style="color:#666; margin-bottom:1.5rem;">
+          Tổ Vàng tuân thủ tuyệt đối quy định bảo vệ dữ liệu cá nhân theo Nghị định 13/2023/NĐ-CP. Bạn có toàn quyền truy xuất, tải về hoặc yêu cầu ẩn danh hóa dữ liệu của mình.
+        </p>
+
+        <div style="background:var(--cream); border:1px solid var(--mist); padding:1.2rem; margin-bottom:1.5rem;">
+          <strong>1. Xuất dữ liệu của tôi (JSON Export)</strong>
+          <p style="color:#777; font-size:0.7rem; margin:0.4rem 0 0.8rem;">
+            Tải về toàn bộ hồ sơ, lịch sử mua hàng, địa chỉ và bản ghi đồng ý chính sách dưới định dạng JSON tiêu chuẩn.
+          </p>
+          <button type="button" class="btn-small" id="btnExportUserData">Tải Dữ Liệu Của Tôi (JSON)</button>
+        </div>
+
+        <div style="background:var(--cream); border:1px solid var(--mist); padding:1.2rem;">
+          <strong>2. Yêu cầu xóa tài khoản / Ẩn danh hóa</strong>
+          <p style="color:#777; font-size:0.7rem; margin:0.4rem 0 0.8rem;">
+            Toàn bộ thông tin định danh cá nhân sẽ được ẩn danh hóa. Lịch sử chứng từ mua hàng được bảo lưu theo thời hạn luật kế toán.
+          </p>
+          <button type="button" class="btn-small btn-small-danger" onclick="alert('Yêu cầu đã được gửi đến ban quản trị để xử lý trong 72 giờ theo quy định.');">Gửi Yêu Cầu Xóa Tài Khoản</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ADMIN MANAGEMENT MODAL (E1, E2, E3, E4) -->
+  <div class="modal-overlay" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="modalAdminTitle">
+    <div class="modal-box" style="max-width: 960px;">
+      <button class="modal-close-btn" id="btnCloseAdminModal" aria-label="Đóng">[ ĐÓNG ]</button>
+      <div style="font-family:var(--font-mono); font-size:0.68rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--rust); margin-bottom:0.4rem;">
+        ★ KHU VỰC QUẢN TRỊ VIÊN TỔ VÀNG ★
+      </div>
+      <h3 class="modal-title" id="modalAdminTitle">Bảng Điều Khiển Hệ Thống</h3>
+
+      <div class="modal-tabs">
+        <button type="button" class="modal-tab-btn admin-tab-btn active" data-tab="dashboard">Tổng Quan</button>
+        <button type="button" class="modal-tab-btn admin-tab-btn" data-tab="orders">Quản Lý Đơn Hàng</button>
+        <button type="button" class="modal-tab-btn admin-tab-btn" data-tab="inventory">Kho & Giá Biến Thể</button>
+      </div>
+
+      <!-- TAB TỔNG QUAN -->
+      <div id="adminTabDashboard">
+        <div class="admin-stats-grid">
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Doanh Thu Đã Xác Nhận</div>
+            <div class="admin-stat-value" id="adminTotalRev">0đ</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Tổng Đơn Hàng</div>
+            <div class="admin-stat-value" id="adminTotalOrders">0</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Đơn Cần Xử Lý</div>
+            <div class="admin-stat-value" id="adminPendingOrders" style="color:var(--rust);">0</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Biến Thể Sắp Hết</div>
+            <div class="admin-stat-value" id="adminLowStockCount">0</div>
+          </div>
+        </div>
+
+        <h4 style="font-family:var(--font-serif); font-size:1.15rem; margin-bottom:0.6rem;">Cảnh Báo Tồn Kho Thấp (&lt; 15 chai)</h4>
+        <div style="overflow-x:auto; margin-bottom:2rem;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Sản Phẩm</th>
+                <th>Biến Thể</th>
+                <th>Tồn Kho</th>
+                <th>Giá Bán</th>
+              </tr>
+            </thead>
+            <tbody id="adminLowStockTable"></tbody>
+          </table>
+        </div>
+
+        <h4 style="font-family:var(--font-serif); font-size:1.15rem; margin-bottom:0.6rem;">10 Đơn Hàng Mới Nhất</h4>
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Mã Đơn</th>
+                <th>Khách Hàng</th>
+                <th>Tổng Tiền</th>
+                <th>Trạng Thái</th>
+              </tr>
+            </thead>
+            <tbody id="adminRecentOrdersTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB QUẢN LÝ ĐƠN HÀNG -->
+      <div id="adminTabOrders" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
+          <div style="font-family:var(--font-mono); font-size:0.75rem;">
+            Lọc theo trạng thái:
+            <select id="adminOrderStatusSelect" class="form-input" style="width:auto; display:inline-block; padding:0.4rem 0.8rem; margin-left:0.5rem;">
+              <option value="">-- Tất cả trạng thái --</option>
+              <option value="pending_payment">Chờ thanh toán (VietQR)</option>
+              <option value="pending_confirmation">Chờ xác nhận (COD)</option>
+              <option value="confirmed">Đã xác nhận</option>
+              <option value="shipping">Đang giao hàng</option>
+              <option value="delivered">Đã giao thành công</option>
+              <option value="cancelled">Đã hủy</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto; max-height:480px;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Mã Đơn</th>
+                <th>Khách Hàng</th>
+                <th>Sản Phẩm Đặt</th>
+                <th>Tổng Tiền</th>
+                <th>Trạng Thái</th>
+                <th>Hành Động</th>
+              </tr>
+            </thead>
+            <tbody id="adminOrdersTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB KHO & GIÁ -->
+      <div id="adminTabInventory" style="display:none;">
+        <div style="font-family:var(--font-mono); font-size:0.75rem; color:#666; margin-bottom:1rem;">
+          Thay đổi trực tiếp số lượng tồn kho và giá bán biến thể. Nhấn "Lưu Cập Nhật" để áp dụng ngay vào cơ sở dữ liệu.
+        </div>
+        <div style="overflow-x:auto; max-height:480px;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Sản Phẩm</th>
+                <th>Biến Thể</th>
+                <th>SKU</th>
+                <th>Tồn Kho</th>
+                <th>Giá Bán (VND)</th>
+              </tr>
+            </thead>
+            <tbody id="adminInventoryTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/main.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/auth.js" defer></script>
+  <script src="js/cart.js" defer></script>
+  <script src="js/products.js" defer></script>
+  <script src="js/checkout.js" defer></script>
+  <script src="js/account.js" defer></script>
+  <script src="js/admin.js" defer></script>
+  <script src="js/reviews.js" defer></script>
+
+</body>
+</html>

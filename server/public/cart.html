@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giỏ Hàng — Tổ Vàng Mật Ong Rừng Hà Tĩnh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css?v=2.0">
+  <link rel="stylesheet" href="css/base.css?v=2.0">
+  <link rel="stylesheet" href="css/components.css?v=2.0">
+  <link rel="stylesheet" href="css/sections.css?v=2.0">
+  <link rel="stylesheet" href="css/responsive.css?v=2.0">
+  <link rel="stylesheet" href="css/ecommerce.css?v=2.0">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html" class="nav-logo">Tổ<span>Vàng</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Trang Chủ</a></li>
+      <li><a href="products.html">Cửa Hàng</a></li>
+      <li><a href="index.html#origin">Nguồn Gốc</a></li>
+      <li><a href="index.html#why">Triết Lý</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="cart.html" class="btn-nav-cart" id="btnNavCart" title="Xem giỏ hàng">
+        <span class="cart-label">Giỏ Hàng</span>
+        [<span class="cart-badge" id="cartBadge">0</span>]
+      </a>
+      <a href="products.html" class="nav-cta">Tiếp Tục Mua</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CART PAGE CONTAINER -->
+  <main class="site-page-container">
+    <div class="page-breadcrumb">
+      <a href="index.html">Trang chủ</a> <span>/</span> <a href="products.html">Cửa hàng</a> <span>/</span> <span>Giỏ hàng</span>
+    </div>
+
+    <div class="page-header-box">
+      <div>
+        <h1 class="page-main-title">Giỏ Hàng Của Bạn</h1>
+        <p class="page-main-sub">Kiểm tra số lượng và danh mục mật ong rừng trước khi chuyển sang bước thanh toán</p>
+      </div>
+      <a href="products.html" class="btn-secondary">← Chọn Thêm Sản Phẩm</a>
+    </div>
+
+    <!-- Free shipping progress bar -->
+    <div style="background:#201913; border:1px solid rgba(201,168,76,0.3); padding:1.2rem 1.6rem; margin-bottom:2rem; border-radius:4px;">
+      <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-family:var(--font-mono); margin-bottom:0.7rem; color:var(--cream);">
+        <span id="pageShippingNotice" style="color:var(--cream);">Mua thêm để được miễn phí vận chuyển toàn quốc</span>
+        <span style="color:var(--gold); font-weight:bold;">Ngưỡng Free Ship: 500.000đ</span>
+      </div>
+      <div style="width:100%; height:8px; background:#2e241b; overflow:hidden; border-radius:4px;">
+        <div id="pageShippingProgress" style="width:0%; height:100%; background:var(--gold); transition:width 0.3s;"></div>
+      </div>
+    </div>
+
+    <!-- Cart Layout Grid -->
+    <div class="cart-page-layout" id="cartPageLayout">
+      
+      <!-- LEFT: Items Table -->
+      <div>
+        <div style="background:#201913; border:1px solid rgba(201,168,76,0.25); border-radius:4px; overflow-x:auto;">
+          <table class="cart-items-table">
+            <thead>
+              <tr>
+                <th>Sản Phẩm</th>
+                <th>Quy Cách / Đơn Giá</th>
+                <th>Số Lượng (Tối đa 10)</th>
+                <th>Thành Tiền</th>
+                <th>Thao Tác</th>
+              </tr>
+            </thead>
+            <tbody id="cartPageTableBody">
+              <tr><td colspan="5" style="text-align:center; padding:2rem; color:var(--cream);">Đang nạp dữ liệu giỏ hàng...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top:1.5rem; font-size:0.82rem; color:#c5bdb2; line-height:1.6; background:#201913; padding:1.2rem; border:1px dashed rgba(201,168,76,0.3); border-radius:4px;">
+          🔒 <strong style="color:var(--gold);">Chính sách đóng gói:</strong> Mật ong rừng Tổ Vàng được đóng trong chai thủy tinh tinh khiết, bọc chống sốc 3 lớp đạt chuẩn vận chuyển đường bộ và đường bay toàn quốc.
+        </div>
+      </div>
+
+      <!-- RIGHT: Summary Box -->
+      <aside class="cart-summary-box">
+        <h3 style="font-family:var(--font-serif); font-size:1.3rem; margin-bottom:1.2rem; border-bottom:1px solid rgba(201,168,76,0.3); padding-bottom:0.6rem; color:var(--cream);">
+          Tóm Tắt Đơn Hàng
+        </h3>
+
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; font-size:0.9rem;">
+          <span style="color:#c5bdb2;">Tạm tính sản phẩm:</span>
+          <strong id="cartPageSubtotal" style="color:var(--cream);">0đ</strong>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; font-size:0.9rem;">
+          <span style="color:#c5bdb2;">Phí vận chuyển dự kiến:</span>
+          <span id="cartPageShippingFee" style="font-weight:600; color:var(--cream);">30.000đ</span>
+        </div>
+
+        <div style="border-top:1px solid rgba(201,168,76,0.3); padding-top:1rem; margin-top:1rem; display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1.5rem;">
+          <span style="font-size:1rem; font-weight:600; color:var(--cream);">Tổng thanh toán:</span>
+          <strong id="cartPageTotal" style="font-family:var(--font-display); font-size:1.6rem; color:var(--gold);">0đ</strong>
+        </div>
+
+        <a href="checkout.html" class="btn-primary" id="btnGoToCheckout" style="display:block; text-align:center; width:100%; padding:1rem 0; font-size:0.8rem; letter-spacing:0.14em;">
+          TIẾN HÀNH THANH TOÁN →
+        </a>
+
+        <div style="text-align:center; margin-top:1rem;">
+          <a href="products.html" style="font-family:var(--font-mono); font-size:0.75rem; color:var(--gold); text-decoration:underline;">
+            Tiếp tục xem các loại mật khác
+          </a>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Empty State Container -->
+    <div id="cartEmptyState" style="display:none; text-align:center; padding: 4rem 1.5rem; background:#201913; border:1px solid rgba(201,168,76,0.3); border-radius:4px;">
+      <span class="cart-empty-tag" style="color:var(--gold); font-family:var(--font-mono); font-size:0.75rem; letter-spacing:0.2em;">[ DANH MỤC TRỐNG ]</span>
+      <h2 style="font-family:var(--font-serif); color:var(--cream); margin:1rem 0; font-size:1.8rem;">Giỏ Hàng Của Bạn Đang Trống</h2>
+      <p style="margin-bottom:1.8rem; color:#c5bdb2; max-width:500px; margin-left:auto; margin-right:auto; font-size:0.9rem; line-height:1.8;">
+        Hãy khám phá các mẻ mật ong rừng nguyên bản thu hoạch thủ công tại rừng già nguyên sinh Vũ Quang, Hà Tĩnh.
+      </p>
+      <a href="products.html" class="btn-primary">Xem Danh Mục Sản Phẩm</a>
+    </div>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await window.TovangApi.checkAuth();
+      loadCartPage();
+    });
+
+    async function loadCartPage() {
+      try {
+        const res = await window.TovangApi.get('/api/v1/cart');
+        if (!res.success || !res.data) return;
+
+        const cart = res.data;
+        const tbody = document.getElementById('cartPageTableBody');
+        const emptyState = document.getElementById('cartEmptyState');
+        const cartLayout = document.getElementById('cartPageLayout');
+        const subtotalEl = document.getElementById('cartPageSubtotal');
+        const shippingFeeEl = document.getElementById('cartPageShippingFee');
+        const totalEl = document.getElementById('cartPageTotal');
+        const progressEl = document.getElementById('pageShippingProgress');
+        const noticeEl = document.getElementById('pageShippingNotice');
+        const checkoutBtn = document.getElementById('btnGoToCheckout');
+
+        if (!cart.items || cart.items.length === 0) {
+          cartLayout.style.display = 'none';
+          emptyState.style.display = 'block';
+          return;
+        }
+
+        cartLayout.style.display = 'grid';
+        emptyState.style.display = 'none';
+
+        let rows = '';
+        cart.items.forEach(item => {
+          const itemSubtotal = item.price * item.quantity;
+          rows += `
+            <tr data-id="${item.id}">
+              <td>
+                <div class="cart-item-info">
+                  <img src="assets/images/honey-forest-wide.jpg" alt="${item.product_name}" class="cart-item-thumb">
+                  <div>
+                    <strong style="font-size:0.95rem; color:var(--ink);">${item.product_name}</strong>
+                    <div style="font-family:var(--font-mono); font-size:0.75rem; color:#777; margin-top:0.2rem;">SKU: ${item.sku || 'MOR'}</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div><strong>${item.variant_name}</strong></div>
+                <div style="color:#666; font-size:0.85rem;">${window.TovangApi.formatMoney(item.price)}</div>
+              </td>
+              <td>
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                  <button type="button" class="qty-btn btn-page-dec" data-id="${item.id}" data-qty="${item.quantity - 1}">-</button>
+                  <span style="font-family:var(--font-mono); font-weight:bold; min-width:30px; text-align:center;">${item.quantity}</span>
+                  <button type="button" class="qty-btn btn-page-inc" data-id="${item.id}" data-qty="${item.quantity + 1}">+</button>
+                </div>
+              </td>
+              <td>
+                <strong style="color:var(--rust); font-size:1rem;">${window.TovangApi.formatMoney(itemSubtotal)}</strong>
+              </td>
+              <td>
+                <button type="button" class="btn-small btn-small-danger btn-page-del" data-id="${item.id}" title="Xóa món này">
+                  Xóa
+                </button>
+              </td>
+            </tr>
+          `;
+        });
+
+        tbody.innerHTML = rows;
+
+        // Attach item update listeners
+        tbody.querySelectorAll('.btn-page-dec').forEach(b => {
+          b.addEventListener('click', async () => {
+            const qty = parseInt(b.getAttribute('data-qty'), 10);
+            await window.TovangCart?.updateItem(b.getAttribute('data-id'), qty);
+            loadCartPage();
+          });
+        });
+        tbody.querySelectorAll('.btn-page-inc').forEach(b => {
+          b.addEventListener('click', async () => {
+            const qty = parseInt(b.getAttribute('data-qty'), 10);
+            if (qty > 10) {
+              window.TovangApi.showToast('Số lượng tối đa 10 chai mỗi biến thể trên một đơn.', 'info');
+              return;
+            }
+            await window.TovangCart?.updateItem(b.getAttribute('data-id'), qty);
+            loadCartPage();
+          });
+        });
+        tbody.querySelectorAll('.btn-page-del').forEach(b => {
+          b.addEventListener('click', async () => {
+            await window.TovangCart?.removeItem(b.getAttribute('data-id'));
+            loadCartPage();
+          });
+        });
+
+        // Summary values
+        const threshold = cart.free_shipping_threshold || 500000;
+        const isFreeShip = cart.subtotal >= threshold;
+        const shippingFee = isFreeShip ? 0 : 30000;
+        const grandTotal = cart.subtotal + shippingFee;
+
+        subtotalEl.textContent = window.TovangApi.formatMoney(cart.subtotal);
+        shippingFeeEl.textContent = isFreeShip ? 'MIỄN PHÍ' : '30.000đ';
+        if (isFreeShip) shippingFeeEl.style.color = '#2e7d32';
+        totalEl.textContent = window.TovangApi.formatMoney(grandTotal);
+
+        // Progress bar
+        const percent = Math.min(100, Math.round((cart.subtotal / threshold) * 100));
+        progressEl.style.width = `${percent}%`;
+        if (isFreeShip) {
+          noticeEl.innerHTML = '<strong style="color:#2e7d32;">✓ Đơn hàng của bạn được MIỄN PHÍ VẬN CHUYỂN toàn quốc!</strong>';
+        } else {
+          const remaining = threshold - cart.subtotal;
+          noticeEl.textContent = `Mua thêm ${window.TovangApi.formatMoney(remaining)} để được Miễn Phí Vận Chuyển`;
+        }
+
+      } catch (err) {
+        console.error('Lỗi nạp giỏ hàng:', err);
+      }
+    }
+  </script>
+</body>
+</html>

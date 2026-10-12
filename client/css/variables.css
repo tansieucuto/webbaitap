@@ -1,0 +1,42 @@
+/* ==========================================================================
+   TỔ VÀNG — VARIABLES.CSS (ÉLAN STUDIO AESTHETIC SYSTEM)
+   ========================================================================== */
+
+:root {
+  /* Page Background */
+  --bg-main: #18130e;    /* Màu nâu đen đậm */
+
+  /* Élan Core Color Palette */
+  --ink: #0d0c0a;        /* Deep charcoal / rich editorial black */
+  --cream: #f5f0e8;      /* Luxury warm ivory background */
+  --gold: #c9a84c;       /* Refined honey gold accent */
+  --rust: #b84c2d;       /* Warm terracotta / wild amber accent */
+  --mist: #d8d2c6;       /* Hairline border / delicate warm divider */
+  --paper: #ede8de;      /* Card & panel surface */
+  --muted: #6e685f;      /* Secondary editorial text */
+  --charcoal: #1c1a17;   /* Elevated dark container */
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-display: 'Syne', sans-serif;
+
+  /* Legacy Fallbacks mapping to Élan Palette */
+  --brown: var(--ink);
+  --brown-mid: var(--muted);
+  --gold-dark: #916828;
+  --gold-light: #dfc27d;
+  --warm-white: var(--cream);
+  --amber: var(--rust);
+  --amber-pale: var(--paper);
+
+  /* Geometry & Lines */
+  --border-hairline: 1px solid var(--mist);
+  --border-gold: 1px solid var(--gold);
+  --border-dark: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-lift: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}

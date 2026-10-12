@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đặt Hàng Thành Công — Tổ Vàng Mật Ong Rừng Hà Tĩnh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css?v=2.0">
+  <link rel="stylesheet" href="css/base.css?v=2.0">
+  <link rel="stylesheet" href="css/components.css?v=2.0">
+  <link rel="stylesheet" href="css/sections.css?v=2.0">
+  <link rel="stylesheet" href="css/responsive.css?v=2.0">
+  <link rel="stylesheet" href="css/ecommerce.css?v=2.0">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html" class="nav-logo">Tổ<span>Vàng</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Trang Chủ</a></li>
+      <li><a href="products.html">Cửa Hàng</a></li>
+      <li><a href="account.html#orders">Đơn Hàng Của Tôi</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="account.html" class="nav-cta">Tài Khoản</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <main class="site-page-container" style="max-width: 800px;">
+    
+    <div class="order-success-card" id="successBox">
+      <div style="font-size:3rem; color:#4caf50; margin-bottom:0.5rem;">✓</div>
+      <h1 style="font-family:var(--font-serif); font-size:2rem; color:var(--ink); margin-bottom:0.4rem;">
+        Cảm Ơn Quý Khách Đã Đặt Hàng!
+      </h1>
+      <p style="color:#2b2824; font-size:0.95rem; margin-bottom:1.5rem;">
+        Đơn hàng mật ong rừng nguyên bản của bạn đã được ghi nhận vào hệ thống Tổ Vàng.
+      </p>
+
+      <div style="background:var(--cream); padding:1.2rem; border:1px dashed var(--mist); display:inline-block; font-family:var(--font-mono); font-size:1.1rem; color:var(--rust); font-weight:bold; letter-spacing:0.1em; margin-bottom:1.5rem;">
+        MÃ ĐƠN: <span id="displayOrderCode">TV-LOADING</span>
+      </div>
+
+      <!-- VietQR Box (Nếu phương thức là Chuyển khoản) -->
+      <div id="vietqrTransferSection" style="display:none; background:#fffcf8; border:2px solid var(--gold); padding:2rem; margin:1.5rem 0; text-align:center;">
+        <h3 style="font-family:var(--font-serif); font-size:1.3rem; color:#0d0c0a; font-weight:700; margin-bottom:0.4rem;">
+          Thanh Toán Chuyển Khoản Qua VietQR
+        </h3>
+        <p style="font-size:0.85rem; color:#3e3831; margin-bottom:1.2rem;">
+          Mở ứng dụng ngân hàng bất kỳ và quét mã bên dưới để thanh toán tự động đúng số tiền và mã đơn:
+        </p>
+
+        <img id="successQrImage" src="" alt="Mã thanh toán VietQR" style="max-width:280px; width:100%; border:1px solid var(--mist); padding:0.5rem; background:#fff; margin-bottom:1.2rem;">
+
+        <div style="max-width:450px; margin:0 auto; text-align:left; background:#fff; border:1px solid var(--mist); padding:1rem; font-size:0.85rem;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+            <span style="color:#554f46;">Ngân hàng:</span>
+            <strong style="color:#0d0c0a;">Vietcombank (VCB)</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+            <span style="color:#554f46;">Số tài khoản:</span>
+            <strong id="successQrAccNo" style="font-family:var(--font-mono); color:var(--rust); font-weight:700;">—</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+            <span style="color:#554f46;">Chủ tài khoản:</span>
+            <strong id="successQrAccName" style="color:#0d0c0a;">—</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+            <span style="color:#554f46;">Số tiền:</span>
+            <strong id="successQrAmount" style="color:#916828; font-size:1.05rem; font-weight:700;">—</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="color:#554f46;">Nội dung chuyển:</span>
+            <strong id="successQrMemo" style="font-family:var(--font-mono); color:#0d0c0a; background:var(--cream); padding:0.15rem 0.5rem; font-weight:700;">—</strong>
+          </div>
+        </div>
+
+        <!-- DEMO TEST TRIGGER: Nút giả lập thanh toán -->
+        <div style="margin-top:1.5rem; padding-top:1.2rem; border-top:1px dashed var(--gold);">
+          <button type="button" id="btnDemoPaySuccess" class="btn-primary" style="background:#2e7d32; border-color:#2e7d32; padding:0.8rem 1.6rem; font-size:0.85rem; font-weight:bold; cursor:pointer; box-shadow:0 4px 12px rgba(46,125,50,0.2);">
+            ⚡ [DEMO TEST] Giả Lập Đã Quét QR & Thanh Toán Thành Công
+          </button>
+          <div style="font-size:0.75rem; color:#554f46; margin-top:0.6rem; line-height:1.5;">
+            * Bấm nút trên để giả lập luồng khách hàng đã quét mã VietQR và ngân hàng khớp lệnh thành công.
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Details Summary -->
+      <div style="text-align:left; background:#fff; border:1px solid var(--mist); padding:1.5rem; margin:1.5rem 0;">
+        <h4 style="font-family:var(--font-serif); font-size:1.1rem; margin-bottom:1rem; border-bottom:1px solid var(--mist); padding-bottom:0.5rem; color:#0d0c0a; font-weight:700;">
+          Chi Tiết Nhận Hàng & Thanh Toán
+        </h4>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; font-size:0.85rem; line-height:1.6;">
+          <div>
+            <div style="color:#554f46;">Người nhận hàng:</div>
+            <strong id="orderRecipient" style="color:#0d0c0a;">—</strong>
+            <div id="orderPhoneDisplay" style="font-family:var(--font-mono); margin-top:0.2rem; color:#0d0c0a;">—</div>
+            <div style="color:#554f46; margin-top:0.5rem;">Địa chỉ giao hàng:</div>
+            <div id="orderAddressDisplay" style="color:#0d0c0a;">—</div>
+          </div>
+          <div>
+            <div style="color:#554f46;">Phương thức thanh toán:</div>
+            <strong id="orderPaymentMethodDisplay" style="color:#0d0c0a;">—</strong>
+            <div style="color:#554f46; margin-top:0.5rem;">Trạng thái đơn hàng:</div>
+            <span class="status-badge pending_payment" id="orderStatusDisplay">Đang xử lý</span>
+            <div style="color:#554f46; margin-top:0.5rem;">Tổng giá trị thanh toán:</div>
+            <strong id="orderGrandTotalDisplay" style="color:var(--rust); font-size:1.2rem; font-family:var(--font-display);">0đ</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-top:2rem;">
+        <a href="account.html#orders" class="btn-primary">
+          THEO DÕI ĐƠN HÀNG TRONG TÀI KHOẢN →
+        </a>
+        <a href="products.html" class="btn-secondary">
+          TIẾP TỤC MUA SẮM
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await window.TovangApi.checkAuth();
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get('code');
+
+      if (!code) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      document.getElementById('displayOrderCode').textContent = code;
+
+      try {
+        const res = await window.TovangApi.get(`/api/v1/orders/${code}`);
+        if (!res.success || !res.data) return;
+
+        const o = res.data;
+        document.getElementById('orderRecipient').textContent = o.recipient_name;
+        document.getElementById('orderPhoneDisplay').textContent = o.phone;
+        document.getElementById('orderAddressDisplay').textContent = o.full_address;
+        
+        const methodNames = {
+          cod: 'Thanh toán tiền mặt khi nhận hàng (COD)',
+          bank_transfer: 'Chuyển khoản VietQR',
+          vnpay: 'Cổng thanh toán VNPay'
+        };
+        document.getElementById('orderPaymentMethodDisplay').textContent = methodNames[o.payment_method] || o.payment_method;
+        
+        const statusNames = {
+          pending_payment: 'Chờ thanh toán qua VietQR',
+          pending_confirmation: 'Chờ xác nhận đơn hàng',
+          confirmed: '✓ Đã thanh toán & Đã xác nhận',
+          shipping: 'Đang vận chuyển',
+          delivered: 'Giao hàng thành công',
+          cancelled: 'Đã hủy đơn hàng'
+        };
+
+        const stBadge = document.getElementById('orderStatusDisplay');
+        stBadge.className = `status-badge ${o.status}`;
+        stBadge.textContent = statusNames[o.status] || o.status;
+
+        document.getElementById('orderGrandTotalDisplay').textContent = window.TovangApi.formatMoney(o.total);
+
+        // Render VietQR nếu là bank_transfer và đơn chờ thanh toán
+        const qrSec = document.getElementById('vietqrTransferSection');
+        if (o.payment_method === 'bank_transfer' && o.status === 'pending_payment' && o.bankDetails) {
+          qrSec.style.display = 'block';
+          document.getElementById('successQrImage').src = o.bankDetails.qrUrl;
+          document.getElementById('successQrAccNo').textContent = o.bankDetails.accountNumber;
+          document.getElementById('successQrAccName').textContent = o.bankDetails.accountName;
+          document.getElementById('successQrAmount').textContent = window.TovangApi.formatMoney(o.total);
+          document.getElementById('successQrMemo').textContent = o.order_code;
+
+          // Xử lý nút Demo Pay
+          const demoBtn = document.getElementById('btnDemoPaySuccess');
+          if (demoBtn) {
+            demoBtn.onclick = async () => {
+              try {
+                demoBtn.disabled = true;
+                demoBtn.textContent = 'ĐANG XÁC NHẬN THANH TOÁN...';
+                const payRes = await window.TovangApi.post(`/api/v1/orders/${o.order_code}/demo-pay`, {});
+                if (payRes.success) {
+                  window.TovangApi.showToast('⚡ [DEMO] Thanh toán VietQR thành công!', 'success');
+                  setTimeout(() => { window.location.reload(); }, 1000);
+                }
+              } catch (err) {
+                demoBtn.disabled = false;
+                demoBtn.textContent = '⚡ [DEMO TEST] Giả Lập Đã Quét QR & Thanh Toán Thành Công';
+                window.TovangApi.showToast(err.message || 'Lỗi thanh toán demo', 'error');
+              }
+            };
+          }
+        } else if (o.payment_method === 'bank_transfer' && (o.status === 'confirmed' || o.paid_at)) {
+          qrSec.style.display = 'block';
+          qrSec.style.background = '#e8f5e9';
+          qrSec.style.borderColor = '#4caf50';
+          qrSec.innerHTML = `
+            <div style="font-size:2.5rem; color:#2e7d32; margin-bottom:0.5rem;">✓</div>
+            <h3 style="color:#2e7d32; font-family:var(--font-serif); font-size:1.3rem; margin-bottom:0.4rem;">
+              Thanh Toán Thành Công Qua VietQR
+            </h3>
+            <p style="color:#388e3c; font-size:0.9rem;">
+              Hệ thống Tổ Vàng đã xác nhận số tiền <strong>${window.TovangApi.formatMoney(o.total)}</strong> từ lệnh chuyển khoản. Đơn hàng đang được chuẩn bị đóng gói xuất kho.
+            </p>
+          `;
+        }
+
+      } catch (err) {
+        console.error('Lỗi tải chi tiết đơn hàng:', err);
+      }
+    });
+  </script>
+</body>
+</html>

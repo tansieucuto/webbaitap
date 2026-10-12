@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Trị Hệ Thống — Tổ Vàng Mật Ong Rừng Hà Tĩnh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css?v=2.0">
+  <link rel="stylesheet" href="css/base.css?v=2.0">
+  <link rel="stylesheet" href="css/components.css?v=2.0">
+  <link rel="stylesheet" href="css/sections.css?v=2.0">
+  <link rel="stylesheet" href="css/responsive.css?v=2.0">
+  <link rel="stylesheet" href="css/ecommerce.css?v=2.0">
+  <style>
+    body { background: #f7f4ed; }
+    .admin-topbar {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .admin-brand {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .admin-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      background: var(--rust);
+      color: #fff;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      letter-spacing: 0.1em;
+    }
+    .admin-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN TOPBAR -->
+  <header class="admin-topbar">
+    <a href="admin.html" class="admin-brand">
+      TỔ VÀNG <span class="admin-badge">ADMIN CONSOLE</span>
+    </a>
+    <div class="admin-top-actions">
+      <span id="adminGreeting" style="color:var(--cream); opacity:0.8;">Quản trị viên</span>
+      <a href="index.html" class="btn-small" style="background:transparent; border-color:var(--mist); color:var(--cream);" target="_blank">
+        🌐 Xem Cửa Hàng →
+      </a>
+      <button type="button" class="btn-small btn-small-danger" id="btnAdminLogout">
+        Đăng Xuất
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN ADMIN CONTAINER -->
+  <main class="site-page-container" style="margin-top: 2rem;">
+    
+    <!-- Auth Guard Notice -->
+    <div id="adminAuthGuard" style="display:none; text-align:center; padding: 4rem 1rem;">
+      <h2 style="font-family:var(--font-serif); color:var(--rust); margin-bottom:1rem;">⚠️ Yêu Cầu Quyền Quản Trị</h2>
+      <p style="margin-bottom:1.5rem; color:#666;">Bạn cần đăng nhập bằng tài khoản có vai trò Quản Trị Viên (Admin) để truy cập trang này.</p>
+      <a href="index.html" class="btn-primary">Đăng Nhập Tại Trang Chủ</a>
+    </div>
+
+    <!-- Admin Content Layout -->
+    <div class="admin-page-layout" id="adminMainLayout">
+      
+      <!-- SIDEBAR -->
+      <aside class="admin-sidebar">
+        <div style="font-family:var(--font-mono); font-size:0.68rem; color:#888; text-transform:uppercase; letter-spacing:0.14em; margin-bottom:1rem; padding-left:0.5rem;">
+          BẢNG ĐIỀU KHIỂN
+        </div>
+        <button type="button" class="admin-nav-item active" data-tab="dashboard">
+          <span>📊</span> <span>Tổng Quan</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="orders">
+          <span>📦</span> <span>Quản Lý Đơn Hàng</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="inventory">
+          <span>🍯</span> <span>Kho & Sản Phẩm</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="customers">
+          <span>👥</span> <span>Khách Hàng</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="audit">
+          <span>🛡️</span> <span>Nhật Ký Kiểm Toán</span>
+        </button>
+      </aside>
+
+      <!-- CONTENT PANELS -->
+      <section class="admin-content-area">
+
+        <!-- TAB 1: DASHBOARD -->
+        <div id="adminTabDashboard">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Tổng Quan Kinh Doanh</h1>
+              <p class="page-main-sub">Dữ liệu doanh thu thực tế và chỉ số vận hành cửa hàng mật ong rừng Tổ Vàng</p>
+            </div>
+            <button type="button" class="btn-secondary" id="btnRefreshDashboard">↻ Làm Mới</button>
+          </div>
+
+          <!-- STATS CARDS -->
+          <div class="admin-stat-grid">
+            <div class="admin-stat-card">
+              <span class="admin-stat-label">Tổng Doanh Thu</span>
+              <div class="admin-stat-value" id="adminTotalRev">0đ</div>
+              <div class="admin-stat-hint">Từ các đơn đã xác nhận / hoàn thành</div>
+            </div>
+            <div class="admin-stat-card">
+              <span class="admin-stat-label">Tổng Số Đơn Đã Đặt</span>
+              <div class="admin-stat-value" id="adminTotalOrders">0</div>
+              <div class="admin-stat-hint">Toàn bộ vòng đời đơn hàng</div>
+            </div>
+            <div class="admin-stat-card">
+              <span class="admin-stat-label">Đơn Cần Xử Lý</span>
+              <div class="admin-stat-value" id="adminPendingOrders" style="color:var(--rust);">0</div>
+              <div class="admin-stat-hint">Chờ thanh toán & Chờ xác nhận COD</div>
+            </div>
+            <div class="admin-stat-card">
+              <span class="admin-stat-label">Cảnh Báo Tồn Kho</span>
+              <div class="admin-stat-value" id="adminLowStockCount" style="color:#d49a3d;">0</div>
+              <div class="admin-stat-hint">Biến thể có tồn kho &lt; 15 chai</div>
+            </div>
+          </div>
+
+          <!-- LOW STOCK WARNINGS -->
+          <div style="background:var(--paper); border:1px solid var(--mist); padding:1.5rem; margin-bottom:2rem;">
+            <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:var(--rust); margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+              <span>⚠️ Cảnh Báo Tồn Kho Sắp Hết</span>
+            </h3>
+            <div style="overflow-x:auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Sản Phẩm</th>
+                    <th>Quy Cách / SKU</th>
+                    <th>Tồn Kho</th>
+                    <th>Đơn Giá</th>
+                  </tr>
+                </thead>
+                <tbody id="adminLowStockTable">
+                  <tr><td colspan="4" style="text-align:center; padding:1.5rem;">Đang tải dữ liệu...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- RECENT ORDERS -->
+          <div style="background:var(--paper); border:1px solid var(--mist); padding:1.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+              <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:var(--ink);">Đơn Hàng Gần Đây</h3>
+              <button type="button" class="btn-small" id="btnViewAllOrdersShortcut">Xem Tất Cả Đơn →</button>
+            </div>
+            <div style="overflow-x:auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Mã Đơn</th>
+                    <th>Khách Hàng</th>
+                    <th>Tổng Tiền</th>
+                    <th>Trạng Thái</th>
+                  </tr>
+                </thead>
+                <tbody id="adminRecentOrdersTable">
+                  <tr><td colspan="4" style="text-align:center; padding:1.5rem;">Đang nạp đơn hàng...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: ORDERS MANAGEMENT -->
+        <div id="adminTabOrders" style="display:none;">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Quản Lý Đơn Hàng</h1>
+              <p class="page-main-sub">Vận hành vòng đời đơn theo 9 trạng thái chuẩn mực thương mại điện tử</p>
+            </div>
+            <div style="display:flex; gap:0.6rem; align-items:center;">
+              <input type="text" id="adminOrderSearchInput" class="form-input" placeholder="Tìm theo mã đơn, SĐT..." style="width:200px; padding:0.5rem;">
+              <select id="adminOrderStatusSelect" class="form-select" style="width:180px; padding:0.5rem;">
+                <option value="">Tất cả trạng thái</option>
+                <option value="pending_payment">Chờ thanh toán</option>
+                <option value="pending_confirmation">Chờ xác nhận</option>
+                <option value="confirmed">Đã xác nhận</option>
+                <option value="shipping">Đang giao</option>
+                <option value="delivered">Đã giao</option>
+                <option value="cancelled">Đã hủy</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="adminOrdersList">
+            <!-- Render danh sách đơn hàng chi tiết kèm nút xử lý -->
+          </div>
+        </div>
+
+        <!-- TAB 3: INVENTORY & PRODUCTS -->
+        <div id="adminTabInventory" style="display:none;">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Kho Hàng & Biến Thể Sản Phẩm</h1>
+              <p class="page-main-sub">Cập nhật giá niêm yết và số lượng tồn kho trực tiếp vào cơ sở dữ liệu</p>
+            </div>
+          </div>
+
+          <div style="background:var(--paper); border:1px solid var(--mist); padding:1.5rem;">
+            <div style="overflow-x:auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Sản Phẩm</th>
+                    <th>Quy Cách / SKU</th>
+                    <th>Đơn Giá (VND)</th>
+                    <th>Số Lượng Tồn</th>
+                    <th>Trạng Thái</th>
+                    <th>Hành Động</th>
+                  </tr>
+                </thead>
+                <tbody id="adminInventoryTable">
+                  <tr><td colspan="6" style="text-align:center; padding:1.5rem;">Đang tải danh sách kho...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: CUSTOMERS -->
+        <div id="adminTabCustomers" style="display:none;">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Danh Sách Khách Hàng</h1>
+              <p class="page-main-sub">Quản lý người dùng và lịch sử mua sắm (Dữ liệu liên hệ được che bảo mật theo chuẩn E6)</p>
+            </div>
+          </div>
+
+          <div style="background:var(--paper); border:1px solid var(--mist); padding:1.5rem;">
+            <div style="overflow-x:auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Khách Hàng</th>
+                    <th>Email (Bảo mật)</th>
+                    <th>Số ĐT (Bảo mật)</th>
+                    <th>Số Đơn Đã Mua</th>
+                    <th>Tổng Chi Tiêu</th>
+                    <th>Ngày Tham Gia</th>
+                  </tr>
+                </thead>
+                <tbody id="adminCustomersTable">
+                  <tr><td colspan="6" style="text-align:center; padding:1.5rem;">Đang tải danh sách khách hàng...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: AUDIT LOGS -->
+        <div id="adminTabAudit" style="display:none;">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Nhật Ký Kiểm Toán (Audit Logs)</h1>
+              <p class="page-main-sub">Bản ghi bảo mật bất biến theo chuẩn E9 — Ghi nhận mọi thao tác nhạy cảm</p>
+            </div>
+          </div>
+
+          <div style="background:var(--paper); border:1px solid var(--mist); padding:1.5rem;">
+            <div style="overflow-x:auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Thời Gian</th>
+                    <th>Hành Động</th>
+                    <th>Thực Hiện Bởi</th>
+                    <th>Chi Tiết</th>
+                    <th>IP Address</th>
+                  </tr>
+                </thead>
+                <tbody id="adminAuditTable">
+                  <tr><td colspan="5" style="text-align:center; padding:1.5rem;">Đang tải nhật ký kiểm toán...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await window.TovangApi.checkAuth();
+      if (!user || (user.role !== 'admin' && user.role !== 'staff')) {
+        document.getElementById('adminAuthGuard').style.display = 'block';
+        document.getElementById('adminMainLayout').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('adminGreeting').textContent = `${user.full_name} [${user.role.toUpperCase()}]`;
+
+      // Sidebar Tab Switching
+      document.querySelectorAll('.admin-nav-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.admin-nav-item').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const tab = btn.getAttribute('data-tab');
+          
+          document.getElementById('adminTabDashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
+          document.getElementById('adminTabOrders').style.display = tab === 'orders' ? 'block' : 'none';
+          document.getElementById('adminTabInventory').style.display = tab === 'inventory' ? 'block' : 'none';
+          document.getElementById('adminTabCustomers').style.display = tab === 'customers' ? 'block' : 'none';
+          document.getElementById('adminTabAudit').style.display = tab === 'audit' ? 'block' : 'none';
+
+          if (tab === 'dashboard') window.TovangAdmin?.loadAdminDashboard();
+          if (tab === 'orders') window.TovangAdmin?.loadAdminOrders();
+          if (tab === 'inventory') window.TovangAdmin?.loadAdminInventory();
+          if (tab === 'customers') loadCustomersTab();
+          if (tab === 'audit') loadAuditLogsTab();
+        });
+      });
+
+      document.getElementById('btnAdminLogout')?.addEventListener('click', async () => {
+        await window.TovangAuth?.logout();
+        window.location.href = 'index.html';
+      });
+
+      document.getElementById('btnRefreshDashboard')?.addEventListener('click', () => {
+        window.TovangAdmin?.loadAdminDashboard();
+      });
+
+      document.getElementById('btnViewAllOrdersShortcut')?.addEventListener('click', () => {
+        document.querySelector('.admin-nav-item[data-tab="orders"]')?.click();
+      });
+
+      // Load initial dashboard
+      window.TovangAdmin?.loadAdminDashboard();
+    });
+
+    async function loadCustomersTab() {
+      const tbody = document.getElementById('adminCustomersTable');
+      if (!tbody) return;
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:1.2rem;">Đang nạp dữ liệu khách hàng...</td></tr>';
+      try {
+        const res = await window.TovangApi.get('/api/v1/admin/customers');
+        if (!res.success || !res.data || res.data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:1.2rem;">Chưa có khách hàng nào đăng ký.</td></tr>';
+          return;
+        }
+        let rows = '';
+        res.data.forEach(c => {
+          const dateStr = new Date(c.created_at).toLocaleDateString('vi-VN');
+          rows += `
+            <tr>
+              <td><strong>${c.full_name}</strong></td>
+              <td style="font-family:var(--font-mono);">${c.email}</td>
+              <td style="font-family:var(--font-mono);">${c.phone || 'Chưa cập nhật'}</td>
+              <td>${c.order_count} đơn</td>
+              <td style="font-weight:bold; color:var(--rust);">${window.TovangApi.formatMoney(c.total_spent)}</td>
+              <td>${dateStr}</td>
+            </tr>
+          `;
+        });
+        tbody.innerHTML = rows;
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="6" style="color:var(--rust); padding:1rem;">Lỗi tải dữ liệu: ${err.message}</td></tr>`;
+      }
+    }
+
+    async function loadAuditLogsTab() {
+      const tbody = document.getElementById('adminAuditTable');
+      if (!tbody) return;
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:1.2rem;">Đang nạp nhật ký kiểm toán...</td></tr>';
+      try {
+        const res = await window.TovangApi.get('/api/v1/admin/audit-logs');
+        if (!res.success || !res.data || res.data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:1.2rem;">Chưa có bản ghi kiểm toán nào.</td></tr>';
+          return;
+        }
+        let rows = '';
+        res.data.forEach(log => {
+          const dateStr = new Date(log.created_at).toLocaleString('vi-VN');
+          let detailsText = '';
+          try {
+            detailsText = typeof log.details === 'object' ? JSON.stringify(log.details) : log.details;
+          } catch (_) {
+            detailsText = log.details || '';
+          }
+          rows += `
+            <tr>
+              <td style="font-family:var(--font-mono); font-size:0.75rem;">${dateStr}</td>
+              <td><span class="status-badge confirmed">${log.action}</span></td>
+              <td>${log.user_name || log.user_email || 'Hệ thống'}</td>
+              <td style="font-family:var(--font-mono); font-size:0.72rem; word-break:break-all;">${detailsText}</td>
+              <td style="font-family:var(--font-mono); font-size:0.75rem;">${log.ip_address || '—'}</td>
+            </tr>
+          `;
+        });
+        tbody.innerHTML = rows;
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="5" style="color:var(--rust); padding:1rem;">Lỗi tải nhật ký: ${err.message}</td></tr>`;
+      }
+    }
+  </script>
+</body>
+</html>

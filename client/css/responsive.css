@@ -1,0 +1,221 @@
+/* ==========================================================================
+   TỔ VÀNG — RESPONSIVE.CSS (ÉLAN STUDIO AESTHETIC SYSTEM)
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  nav {
+    padding: 1.4rem 2.5rem;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 7rem 2.5rem 5rem;
+  }
+
+  .hero-content {
+    padding-right: 0;
+  }
+
+  .hero-right {
+    padding-top: 3rem;
+    justify-content: flex-start;
+  }
+
+  .hero-card {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .origin-section {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding: 6rem 2.5rem;
+  }
+
+  .about-img {
+    aspect-ratio: 16/10;
+  }
+
+  .service-row {
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+  }
+
+  .service-tag {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: inline-block;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 66px;
+    left: 0;
+    right: 0;
+    background: rgba(32, 18, 4, 0.98);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2.5rem 2.5rem;
+    gap: 1.6rem;
+    border-bottom: 1px solid var(--mist);
+    transform: translateY(-150%);
+    transition: transform var(--transition-smooth);
+    z-index: 99;
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+  }
+
+  .section,
+  .why-section,
+  .origin-section,
+  .testimonials-section,
+  .contact {
+    padding: 5.5rem 2rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+
+  .reviews-summary-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem 2rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+
+  .product-card.product-hero {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+    min-height: 280px;
+  }
+
+  .product-card.product-hero .product-card-overlay {
+    padding: 2.5rem 1.5rem 1.5rem;
+  }
+
+  .product-card.product-hero .product-name {
+    font-size: 1.5rem;
+  }
+
+  .product-card:not(.product-hero) {
+    aspect-ratio: 1 / 1.4;
+  }
+
+  .product-card:not(.product-hero) .product-card-overlay {
+    padding: 1.8rem 1rem 1rem;
+  }
+
+  .product-card:not(.product-hero) .product-name {
+    font-size: 1rem;
+  }
+
+  .product-card:not(.product-hero) .product-price {
+    font-size: 1.05rem;
+  }
+
+  .cart-drawer {
+    max-width: 100%;
+  }
+
+  footer {
+    padding: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .hero {
+    padding: 6.5rem 1.5rem 4rem;
+  }
+
+  .hero-title {
+    font-size: 2.7rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .hero-actions .btn-primary {
+    width: 100%;
+  }
+
+  .section,
+  .why-section,
+  .origin-section,
+  .testimonials-section,
+  .contact {
+    padding: 4.5rem 1.5rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .product-card {
+    padding: 0 !important;
+  }
+
+  .product-card.product-hero {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+    min-height: 230px;
+  }
+
+  .product-card.product-hero .product-card-overlay {
+    padding: 1.8rem 1rem 1rem;
+  }
+
+  .product-card.product-hero .product-name {
+    font-size: 1.25rem;
+  }
+
+  .product-card:not(.product-hero) {
+    aspect-ratio: 1 / 1.38;
+  }
+
+  .product-card:not(.product-hero) .product-card-overlay {
+    padding: 1.4rem 0.75rem 0.75rem;
+  }
+
+  .product-card:not(.product-hero) .product-name {
+    font-size: 0.86rem;
+  }
+
+  .product-card:not(.product-hero) .product-price {
+    font-size: 0.92rem;
+  }
+
+  .modal-box {
+    padding: 2.2rem 1.5rem;
+  }
+
+  .contact-meta-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

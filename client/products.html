@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cửa Hàng Mật Ong Rừng — Tổ Vàng Hà Tĩnh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css?v=2.0">
+  <link rel="stylesheet" href="css/base.css?v=2.0">
+  <link rel="stylesheet" href="css/components.css?v=2.0">
+  <link rel="stylesheet" href="css/sections.css?v=2.0">
+  <link rel="stylesheet" href="css/responsive.css?v=2.0">
+  <link rel="stylesheet" href="css/ecommerce.css?v=2.0">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html" class="nav-logo">Tổ<span>Vàng</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Trang Chủ</a></li>
+      <li><a href="products.html" style="color:var(--gold); font-weight:600;">Cửa Hàng</a></li>
+      <li><a href="index.html#origin">Nguồn Gốc</a></li>
+      <li><a href="index.html#why">Triết Lý</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="cart.html" class="btn-nav-cart" id="btnNavCart" title="Xem giỏ hàng">
+        <span class="cart-label">Giỏ Hàng</span>
+        [<span class="cart-badge" id="cartBadge">0</span>]
+      </a>
+      <a href="cart.html" class="nav-cta">Thanh Toán</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CATALOG CONTAINER -->
+  <main class="site-page-container">
+    <div class="page-breadcrumb">
+      <a href="index.html">Trang chủ</a> <span>/</span> <span>Cửa hàng mật ong rừng</span>
+    </div>
+
+    <div class="page-header-box">
+      <div>
+        <h1 class="page-main-title">Tuyển Chọn Mật Ong Rừng Tinh Túy</h1>
+        <p class="page-main-sub">Khai thác bền vững tại rừng già nguyên sinh Vũ Quang, Hà Tĩnh. Không pha trộn, không gia nhiệt.</p>
+      </div>
+      <div style="font-family:var(--font-mono); font-size:0.75rem; color:#888;">
+        Miễn phí vận chuyển cho đơn từ 500.000đ
+      </div>
+    </div>
+
+    <!-- FILTER & SEARCH BAR -->
+    <div style="background:var(--paper); border:1px solid var(--mist); padding:1rem 1.5rem; margin-bottom:2.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div style="display:flex; gap:0.5rem; align-items:center;">
+        <span style="font-family:var(--font-mono); font-size:0.75rem; color:#777;">LỌC:</span>
+        <button type="button" class="btn-small filter-btn active" data-filter="all">Tất Cả</button>
+        <button type="button" class="btn-small filter-btn" data-filter="500ml" style="background:transparent; color:var(--ink);">500ml</button>
+        <button type="button" class="btn-small filter-btn" data-filter="1000ml" style="background:transparent; color:var(--ink);">1 Lít</button>
+      </div>
+
+      <div style="display:flex; gap:0.8rem; align-items:center;">
+        <input type="text" id="catalogSearchInput" class="form-input" placeholder="Tìm kiếm loại mật..." style="width:220px; padding:0.45rem 0.8rem; font-size:0.8rem;">
+        <select id="catalogSortSelect" class="form-select" style="width:170px; padding:0.45rem 0.8rem; font-size:0.8rem;">
+          <option value="default">Sắp xếp: Mặc định</option>
+          <option value="price_asc">Giá: Thấp đến Cao</option>
+          <option value="price_desc">Giá: Cao đến Thấp</option>
+          <option value="rating">Đánh giá cao nhất</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- PRODUCTS GRID -->
+    <div class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+      <!-- Nạp động qua products.js -->
+    </div>
+
+  </main>
+
+  <!-- PRODUCT DETAIL MODAL (A2) -->
+  <div class="modal-overlay" id="productDetailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="modal-box" style="max-width: 820px;">
+      <button class="modal-close-btn" id="btnCloseProductModal" aria-label="Đóng">[ ĐÓNG ]</button>
+      
+      <div class="product-detail-layout">
+        <div>
+          <div class="detail-img-wrap">
+            <img id="detailImg" src="assets/images/honey-forest-wide.jpg" alt="Mật ong rừng">
+          </div>
+        </div>
+
+        <div>
+          <span class="detail-meta-tag" id="detailOriginTag">Hà Tĩnh · Est. 1952</span>
+          <h2 class="detail-title" id="detailTitle">Mật Ong Rừng Hà Tĩnh</h2>
+          
+          <div class="detail-rating-row" id="detailRating">
+            ★ 5.0 · (3 lượt thẩm định thực tế)
+          </div>
+
+          <div class="detail-price-box">
+            <span class="detail-price" id="detailPrice">250.000đ</span>
+            <span class="detail-stock-badge" id="detailStockBadge">Còn hàng</span>
+          </div>
+
+          <p id="detailDesc" style="font-family:var(--font-serif); font-size:0.95rem; color:#4a453f; line-height:1.7; margin-bottom:1.2rem;">
+            Thu hoạch thủ công từ rừng già nguyên sinh Vũ Quang. Không pha trộn, không gia nhiệt.
+          </p>
+
+          <span class="variant-selector-label">Lựa chọn quy cách đóng gói:</span>
+          <div class="variant-buttons" id="detailVariantButtons">
+            <!-- Render variants dynamically -->
+          </div>
+
+          <div class="form-group" style="margin-bottom:1rem;">
+            <label>Số lượng đặt mua:</label>
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+              <button type="button" class="qty-btn" id="btnDetailQtyMinus" style="width:32px; height:32px;">-</button>
+              <input type="number" id="detailQtyInput" value="1" min="1" max="10" readonly style="width:50px; text-align:center; font-family:var(--font-mono); font-weight:bold; border:1px solid var(--mist); background:var(--cream); padding:0.4rem;">
+              <button type="button" class="qty-btn" id="btnDetailQtyPlus" style="width:32px; height:32px;">+</button>
+            </div>
+          </div>
+
+          <table class="specs-table">
+            <tr>
+              <td>Xuất xứ</td>
+              <td id="specOrigin">Vườn Quốc Gia Vũ Quang, Hà Tĩnh</td>
+            </tr>
+            <tr>
+              <td>Thành phần</td>
+              <td id="specIngredients">100% mật ong rừng thô</td>
+            </tr>
+            <tr>
+              <td>Hạn sử dụng</td>
+              <td id="specShelfLife">24 tháng kể từ ngày mở nắp</td>
+            </tr>
+            <tr>
+              <td>Số tự công bố</td>
+              <td id="specDeclaration">CB-1952-HT/2026</td>
+            </tr>
+            <tr>
+              <td>Lưu ý sử dụng</td>
+              <td id="specWarning" style="color:#b84c2d; font-weight:600;">Không dùng cho trẻ dưới 1 tuổi.</td>
+            </tr>
+          </table>
+
+          <div class="safety-warning-box">
+            <strong>⚠️ Lưu ý y khoa:</strong> Không sử dụng mật ong cho trẻ sơ sinh và trẻ nhỏ dưới 1 tuổi do hệ tiêu hóa của trẻ chưa hoàn thiện để dung nạp các vi khuẩn tự nhiên có trong mật thô nguyên chất.
+          </div>
+
+          <button type="button" class="btn-primary" id="btnDetailAddToCart" style="width:100%; padding:0.95rem; font-size:0.75rem;">
+            THÊM VÀO GIỎ HÀNG
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await window.TovangApi.checkAuth();
+
+      // Search & Sort filters
+      const searchInput = document.getElementById('catalogSearchInput');
+      const sortSelect = document.getElementById('catalogSortSelect');
+
+      searchInput?.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.product-card').forEach(card => {
+          const name = card.querySelector('.product-name')?.textContent.toLowerCase() || '';
+          card.style.display = name.includes(query) ? 'block' : 'none';
+        });
+      });
+
+      // Filter Buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => {
+            b.classList.remove('active');
+            b.style.background = 'transparent';
+            b.style.color = 'var(--ink)';
+          });
+          btn.classList.add('active');
+          btn.style.background = 'var(--ink)';
+          btn.style.color = 'var(--cream)';
+
+          const filter = btn.getAttribute('data-filter');
+          document.querySelectorAll('.product-card').forEach(card => {
+            if (filter === 'all') {
+              card.style.display = 'block';
+            } else {
+              const text = card.textContent.toLowerCase();
+              card.style.display = text.includes(filter) ? 'block' : 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

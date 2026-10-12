@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thanh Toán Đơn Hàng — Tổ Vàng Mật Ong Rừng Hà Tĩnh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css?v=2.0">
+  <link rel="stylesheet" href="css/base.css?v=2.0">
+  <link rel="stylesheet" href="css/components.css?v=2.0">
+  <link rel="stylesheet" href="css/sections.css?v=2.0">
+  <link rel="stylesheet" href="css/responsive.css?v=2.0">
+  <link rel="stylesheet" href="css/ecommerce.css?v=2.0">
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html" class="nav-logo">Tổ<span>Vàng</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Trang Chủ</a></li>
+      <li><a href="products.html">Cửa Hàng</a></li>
+      <li><a href="cart.html">Giỏ Hàng</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="cart.html" class="btn-nav-cart" title="Quay lại giỏ hàng">
+        <span class="cart-label">Quay Lại Giỏ</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN CHECKOUT CONTAINER -->
+  <main class="site-page-container">
+    <div class="page-breadcrumb">
+      <a href="index.html">Trang chủ</a> <span>/</span> <a href="cart.html">Giỏ hàng</a> <span>/</span> <span>Thanh toán</span>
+    </div>
+
+    <div class="page-header-box">
+      <div>
+        <h1 class="page-main-title">Hoàn Tất Đặt Hàng</h1>
+        <p class="page-main-sub">Vui lòng cung cấp địa chỉ nhận hàng chính xác và phương thức thanh toán thuận tiện</p>
+      </div>
+    </div>
+
+    <!-- Auth Guard Notice if not logged in -->
+    <div id="checkoutAuthNotice" style="display:none; background:#fffcf8; border:1px solid var(--gold); padding:1rem 1.5rem; margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <strong style="color:var(--rust);">Bạn chưa đăng nhập tài khoản?</strong>
+        <div style="font-size:0.85rem; color:#666;">Đăng nhập để tự động điền sổ địa chỉ và tích lũy đơn hàng của bạn.</div>
+      </div>
+      <a href="index.html" class="btn-small" style="background:var(--gold); color:#1a1917; font-weight:bold;">ĐĂNG NHẬP NGAY</a>
+    </div>
+
+    <form id="standaloneCheckoutForm">
+      <div class="checkout-page-layout">
+        
+        <!-- LEFT COLUMN: Address & Payment Methods -->
+        <div>
+          <!-- Address Section -->
+          <div style="background:var(--paper); border:1px solid var(--mist); padding:1.8rem; margin-bottom:2rem;">
+            <h3 style="font-family:var(--font-serif); font-size:1.25rem; margin-bottom:1.2rem; border-bottom:1px solid var(--mist); padding-bottom:0.5rem;">
+              1. Địa Chỉ Nhận Hàng
+            </h3>
+
+            <!-- Sổ địa chỉ dropdown (nếu có) -->
+            <div id="savedAddressesWrapper" style="display:none; margin-bottom:1.2rem;">
+              <label style="font-size:0.8rem; font-weight:600; color:var(--dark);">Chọn từ sổ địa chỉ đã lưu:</label>
+              <select id="savedAddressSelect" class="form-select" style="margin-top:0.3rem;">
+                <option value="">-- Chọn địa chỉ có sẵn --</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="orderRecipientName">Họ và tên người nhận *</label>
+              <input type="text" id="orderRecipientName" class="form-input" placeholder="Nguyễn Văn A" required>
+            </div>
+
+            <div class="form-group">
+              <label for="orderPhone">Số điện thoại nhận hàng *</label>
+              <input type="tel" id="orderPhone" class="form-input" placeholder="0901234567" required>
+            </div>
+
+            <div class="form-group">
+              <label for="orderAddress">Địa chỉ nhận hàng chi tiết (Số nhà, tên đường, xã/phường, tỉnh/thành) *</label>
+              <textarea id="orderAddress" class="form-textarea" style="min-height:75px;" placeholder="Ví dụ: Số 25 Ngõ 10 Phố Huế, Phường Hàng Bài, Hoàn Kiếm, Hà Nội" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="orderNote">Ghi chú giao hàng (Tùy chọn)</label>
+              <input type="text" id="orderNote" class="form-input" placeholder="Ví dụ: Giao giờ hành chính, gọi trước khi đến...">
+            </div>
+          </div>
+
+          <!-- Payment Section -->
+          <div style="background:var(--paper); border:1px solid var(--mist); padding:1.8rem;">
+            <h3 style="font-family:var(--font-serif); font-size:1.25rem; margin-bottom:1.2rem; border-bottom:1px solid var(--mist); padding-bottom:0.5rem;">
+              2. Phương Thức Thanh Toán
+            </h3>
+
+            <div class="payment-method-cards">
+              <!-- COD -->
+              <label class="payment-card active">
+                <input type="radio" name="payment_method" value="cod" checked>
+                <div class="payment-card-content">
+                  <div style="font-weight:bold; font-size:0.95rem; color:var(--ink);">Thanh toán khi nhận hàng (COD)</div>
+                  <div style="font-size:0.8rem; color:#777; margin-top:0.2rem;">Khách nhận hàng, kiểm tra tem niêm phong và thanh toán tiền mặt trực tiếp cho nhân viên bưu tá.</div>
+                </div>
+              </label>
+
+              <!-- VietQR -->
+              <label class="payment-card">
+                <input type="radio" name="payment_method" value="bank_transfer">
+                <div class="payment-card-content">
+                  <div style="font-weight:bold; font-size:0.95rem; color:var(--ink); display:flex; align-items:center; gap:0.5rem;">
+                    <span>Chuyển khoản VietQR</span>
+                    <span style="font-size:0.65rem; background:var(--gold); color:#1a1917; padding:0.1rem 0.4rem; font-weight:bold; border-radius:2px;">TỰ ĐỘNG KHỚP</span>
+                  </div>
+                  <div style="font-size:0.8rem; color:#777; margin-top:0.2rem;">Hệ thống sẽ tạo mã QR ngân hàng chuẩn NAPAS có sẵn số tiền và mã đơn hàng của bạn.</div>
+                </div>
+              </label>
+
+              <!-- VNPay Sandbox -->
+              <label class="payment-card">
+                <input type="radio" name="payment_method" value="vnpay">
+                <div class="payment-card-content">
+                  <div style="font-weight:bold; font-size:0.95rem; color:var(--ink);">Cổng thanh toán VNPay (Sandbox)</div>
+                  <div style="font-size:0.8rem; color:#777; margin-top:0.2rem;">Hỗ trợ thẻ ATM nội địa, Internet Banking và quét mã VNPAY-QR qua 40+ ứng dụng ngân hàng.</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Order Summary & Confirm -->
+        <aside class="cart-summary-box">
+          <h3 style="font-family:var(--font-serif); font-size:1.3rem; margin-bottom:1.2rem; border-bottom:1px solid var(--mist); padding-bottom:0.6rem;">
+            Đơn Hàng Của Bạn
+          </h3>
+
+          <div id="checkoutItemsList" style="max-height: 280px; overflow-y:auto; margin-bottom:1.2rem; border-bottom:1px solid var(--mist); padding-bottom:0.8rem;">
+            <!-- Render items -->
+          </div>
+
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; font-size:0.9rem;">
+            <span style="color:#666;">Tạm tính:</span>
+            <strong id="chkSubtotal">0đ</strong>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; margin-bottom:0.8rem; font-size:0.9rem;">
+            <span style="color:#666;">Phí vận chuyển:</span>
+            <span id="chkShippingFee" style="font-weight:600;">30.000đ</span>
+          </div>
+
+          <div style="border-top:1px solid var(--mist); padding-top:1rem; margin-top:1rem; display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1.5rem;">
+            <span style="font-size:1rem; font-weight:600;">Tổng thanh toán:</span>
+            <strong id="chkGrandTotal" style="font-family:var(--font-display); font-size:1.7rem; color:var(--rust);">0đ</strong>
+          </div>
+
+          <button type="submit" class="btn-primary" id="btnSubmitOrder" style="width:100%; padding:1.1rem 0; font-size:0.85rem; letter-spacing:0.16em;">
+            XÁC NHẬN ĐẶT HÀNG
+          </button>
+
+          <p style="font-size:0.75rem; color:#888; text-align:center; margin-top:1rem; line-height:1.5;">
+            Bằng việc bấm đặt hàng, bạn đồng ý với <a href="index.html#why" style="color:var(--rust); text-decoration:underline;">Điều khoản dịch vụ</a> và chính sách đổi trả của Tổ Vàng.
+          </p>
+        </aside>
+
+      </div>
+    </form>
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    let currentCartData = null;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await window.TovangApi.checkAuth();
+      if (!user) {
+        document.getElementById('checkoutAuthNotice').style.display = 'flex';
+      } else {
+        // Điền trước thông tin user
+        const nameInput = document.getElementById('orderRecipientName');
+        const phoneInput = document.getElementById('orderPhone');
+        if (nameInput && !nameInput.value) nameInput.value = user.full_name || '';
+        if (phoneInput && !phoneInput.value) phoneInput.value = user.phone || '';
+
+        // Tải sổ địa chỉ đã lưu
+        loadSavedAddresses();
+      }
+
+      // Tải giỏ hàng
+      await loadCartSummary();
+
+      // Radio button selection visual change
+      document.querySelectorAll('input[name="payment_method"]').forEach(r => {
+        r.addEventListener('change', () => {
+          document.querySelectorAll('.payment-card').forEach(c => c.classList.remove('active'));
+          r.closest('.payment-card')?.classList.add('active');
+        });
+      });
+
+      // Submit Checkout
+      document.getElementById('standaloneCheckoutForm')?.addEventListener('submit', handleOrderSubmit);
+    });
+
+    async function loadCartSummary() {
+      try {
+        const res = await window.TovangApi.get('/api/v1/cart');
+        if (!res.success || !res.data || !res.data.items || res.data.items.length === 0) {
+          window.TovangApi.showToast('Giỏ hàng trống! Vui lòng chọn sản phẩm trước.', 'error');
+          setTimeout(() => { window.location.href = 'products.html'; }, 1000);
+          return;
+        }
+
+        currentCartData = res.data;
+        const listEl = document.getElementById('checkoutItemsList');
+        let html = '';
+        currentCartData.items.forEach(it => {
+          html += `
+            <div style="display:flex; justify-content:space-between; margin-bottom:0.7rem; font-size:0.85rem;">
+              <div>
+                <strong>${it.product_name}</strong>
+                <div style="font-size:0.75rem; color:#777;">${it.variant_name} × ${it.quantity}</div>
+              </div>
+              <div style="font-family:var(--font-mono); font-weight:600;">
+                ${window.TovangApi.formatMoney(it.price * it.quantity)}
+              </div>
+            </div>
+          `;
+        });
+        listEl.innerHTML = html;
+
+        const threshold = currentCartData.free_shipping_threshold || 500000;
+        const isFree = currentCartData.subtotal >= threshold;
+        const fee = isFree ? 0 : 30000;
+        const total = currentCartData.subtotal + fee;
+
+        document.getElementById('chkSubtotal').textContent = window.TovangApi.formatMoney(currentCartData.subtotal);
+        document.getElementById('chkShippingFee').textContent = isFree ? 'MIỄN PHÍ' : '30.000đ';
+        if (isFree) document.getElementById('chkShippingFee').style.color = '#2e7d32';
+        document.getElementById('chkGrandTotal').textContent = window.TovangApi.formatMoney(total);
+
+      } catch (err) {
+        console.error('Lỗi nạp giỏ:', err);
+      }
+    }
+
+    async function loadSavedAddresses() {
+      try {
+        const res = await window.TovangApi.get('/api/v1/users/addresses');
+        if (res.success && res.data && res.data.length > 0) {
+          const wrapper = document.getElementById('savedAddressesWrapper');
+          const select = document.getElementById('savedAddressSelect');
+          wrapper.style.display = 'block';
+
+          let options = '<option value="">-- Chọn địa chỉ có sẵn --</option>';
+          res.data.forEach(a => {
+            options += `<option value="${a.id}" data-recipient="${a.recipient_name}" data-phone="${a.phone}" data-addr="${a.street_address}">${a.recipient_name} — ${a.street_address}</option>`;
+          });
+          select.innerHTML = options;
+
+          select.addEventListener('change', () => {
+            const opt = select.selectedOptions[0];
+            if (opt && opt.value) {
+              document.getElementById('orderRecipientName').value = opt.getAttribute('data-recipient');
+              document.getElementById('orderPhone').value = opt.getAttribute('data-phone');
+              document.getElementById('orderAddress').value = opt.getAttribute('data-addr');
+            }
+          });
+        }
+      } catch (_) {}
+    }
+
+    async function handleOrderSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('btnSubmitOrder');
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'ĐANG XỬ LÝ ĐƠN HÀNG...';
+
+        const recipient_name = document.getElementById('orderRecipientName').value.trim();
+        const phone = document.getElementById('orderPhone').value.trim();
+        const full_address = document.getElementById('orderAddress').value.trim();
+        const note = document.getElementById('orderNote').value.trim();
+        const payment_method = document.querySelector('input[name="payment_method"]:checked')?.value || 'cod';
+
+        const idempotency_key = 'IDEMP-' + Date.now() + '-' + Math.random().toString(36).substring(2, 8);
+
+        const payload = {
+          recipient_name,
+          phone,
+          full_address,
+          note: note || undefined,
+          payment_method,
+          idempotency_key
+        };
+
+        const res = await window.TovangApi.post('/api/v1/orders', payload);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'XÁC NHẬN ĐẶT HÀNG';
+
+        if (res.success && res.data) {
+          const order = res.data;
+          window.TovangApi.showToast('Đặt hàng thành công!', 'success');
+          // Chuyển hướng sang trang xác nhận đơn hàng
+          window.location.href = `order-success.html?code=${order.order_code}`;
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'XÁC NHẬN ĐẶT HÀNG';
+        window.TovangApi.showToast(err.message, 'error');
+      }
+    }
+  </script>
+</body>
+</html>

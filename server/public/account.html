@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tài Khoản Của Tôi — Tổ Vàng Mật Ong Rừng Hà Tĩnh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css?v=2.0">
+  <link rel="stylesheet" href="css/base.css?v=2.0">
+  <link rel="stylesheet" href="css/components.css?v=2.0">
+  <link rel="stylesheet" href="css/sections.css?v=2.0">
+  <link rel="stylesheet" href="css/responsive.css?v=2.0">
+  <link rel="stylesheet" href="css/ecommerce.css?v=2.0">
+</head>
+<body class="has-demo-banner">
+
+  <div class="demo-banner">
+    ✦ TỔ VÀNG — MẬT ONG RỪNG HÀ TĨNH · TRUNG TÂM TÀI KHOẢN KHÁCH HÀNG ✦
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html" class="nav-logo">Tổ<span>Vàng</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Trang Chủ</a></li>
+      <li><a href="products.html">Cửa Hàng</a></li>
+      <li><a href="index.html#origin">Nguồn Gốc</a></li>
+      <li><a href="index.html#why">Triết Lý</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="cart.html" class="btn-nav-cart" id="btnNavCart" title="Xem giỏ hàng">
+        <span class="cart-label">Giỏ Hàng</span>
+        [<span class="cart-badge" id="cartBadge">0</span>]
+      </a>
+      <a href="products.html" class="nav-cta">Đặt Mật Ong</a>
+    </div>
+  </nav>
+
+  <!-- MAIN ACCOUNT CONTAINER -->
+  <main class="site-page-container">
+    <div class="page-breadcrumb">
+      <a href="index.html">Trang chủ</a> <span>/</span> <span>Tài khoản của tôi</span>
+    </div>
+
+    <!-- Auth Guard Notice if not logged in -->
+    <div id="accountAuthGuard" style="display:none; text-align:center; padding: 4rem 1rem; background:var(--paper); border:1px solid var(--mist);">
+      <h2 style="font-family:var(--font-serif); color:var(--dark); margin-bottom:1rem;">Vui Lòng Đăng Nhập</h2>
+      <p style="margin-bottom:1.5rem; color:#666;">Bạn cần đăng nhập để xem lịch sử đơn hàng, cập nhật hồ sơ và quản lý sổ địa chỉ.</p>
+      <a href="index.html" class="btn-primary" id="btnGoLogin">Đăng Nhập Ngay</a>
+    </div>
+
+    <!-- Account Page Layout -->
+    <div class="account-page-layout" id="accountMainLayout">
+      
+      <!-- SIDEBAR -->
+      <aside class="account-sidebar">
+        <div style="font-family:var(--font-mono); font-size:0.68rem; color:#888; text-transform:uppercase; letter-spacing:0.14em; margin-bottom:0.5rem; padding-left:0.5rem;">
+          TÀI KHOẢN
+        </div>
+        <div style="font-family:var(--font-serif); font-size:1.1rem; color:var(--ink); margin-bottom:1.2rem; padding-left:0.5rem;" id="accountUserNameDisplay">
+          Khách Hàng
+        </div>
+
+        <button type="button" class="admin-nav-item active" data-tab="orders">
+          <span>📦</span> <span>Đơn Hàng Của Tôi</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="profile">
+          <span>👤</span> <span>Hồ Sơ & Mật Khẩu</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="addresses">
+          <span>📍</span> <span>Sổ Địa Chỉ</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="privacy">
+          <span>🔒</span> <span>Quyền Riêng Tư (D1-D3)</span>
+        </button>
+        <button type="button" class="admin-nav-item" id="btnPageLogout" style="margin-top:1.5rem; border-top:1px solid var(--mist); color:#888;">
+          <span>✕</span> <span>Đăng Xuất</span>
+        </button>
+      </aside>
+
+      <!-- CONTENT AREA -->
+      <section class="account-content-area">
+
+        <!-- TAB 1: ORDERS -->
+        <div id="accountTabOrders">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Lịch Sử Đơn Hàng</h1>
+              <p class="page-main-sub">Theo dõi trạng thái giao nhận và quản lý các đơn hàng mật ong rừng của bạn</p>
+            </div>
+            <a href="products.html" class="btn-secondary">+ Đặt Thêm Đơn Mới</a>
+          </div>
+
+          <div id="userOrdersList">
+            <!-- Render danh sách đơn hàng -->
+          </div>
+        </div>
+
+        <!-- TAB 2: PROFILE & PASSWORD -->
+        <div id="accountTabProfile" style="display:none;">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Thông Tin Cá Nhân & Mật Khẩu</h1>
+              <p class="page-main-sub">Cập nhật họ tên, số điện thoại liên hệ và bảo mật mật khẩu tài khoản</p>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2rem;">
+            <!-- Form thông tin -->
+            <div style="background:var(--paper); border:1px solid var(--mist); padding:1.8rem;">
+              <h3 style="font-family:var(--font-serif); font-size:1.2rem; margin-bottom:1.2rem; border-bottom:1px solid var(--mist); padding-bottom:0.6rem;">
+                Hồ Sơ Của Bạn
+              </h3>
+              <form id="userProfileForm">
+                <div class="form-group">
+                  <label for="profileFullName">Họ và tên *</label>
+                  <input type="text" id="profileFullName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="profilePhone">Số điện thoại</label>
+                  <input type="tel" id="profilePhone" class="form-input">
+                </div>
+                <div class="form-group">
+                  <label for="profileEmail">Địa chỉ Email</label>
+                  <input type="email" id="profileEmail" class="form-input" disabled style="background:#f0ece1; cursor:not-allowed;">
+                </div>
+                <div class="modal-actions" style="margin-top:1.5rem;">
+                  <button type="submit" class="btn-primary" style="width:100%;">LƯU THAY ĐỔI</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Form đổi mật khẩu -->
+            <div style="background:var(--paper); border:1px solid var(--mist); padding:1.8rem;">
+              <h3 style="font-family:var(--font-serif); font-size:1.2rem; margin-bottom:1.2rem; border-bottom:1px solid var(--mist); padding-bottom:0.6rem;">
+                Đổi Mật Khẩu
+              </h3>
+              <form id="userChangePasswordForm">
+                <div class="form-group">
+                  <label for="profileCurrentPassword">Mật khẩu hiện tại *</label>
+                  <input type="password" id="profileCurrentPassword" class="form-input" placeholder="••••••••••" required>
+                </div>
+                <div class="form-group">
+                  <label for="profileNewPassword">Mật khẩu mới (Tối thiểu 10 ký tự) *</label>
+                  <input type="password" id="profileNewPassword" class="form-input" placeholder="••••••••••" minlength="10" required>
+                </div>
+                <div class="form-group">
+                  <label for="profileConfirmPassword">Xác nhận mật khẩu mới *</label>
+                  <input type="password" id="profileConfirmPassword" class="form-input" placeholder="••••••••••" minlength="10" required>
+                </div>
+                <div class="modal-actions" style="margin-top:1.5rem;">
+                  <button type="submit" class="btn-primary" style="width:100%;">CẬP NHẬT MẬT KHẨU</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: ADDRESSES -->
+        <div id="accountTabAddresses" style="display:none;">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Sổ Địa Chỉ Giao Hàng</h1>
+              <p class="page-main-sub">Lưu trữ các địa chỉ nhận hàng thân thuộc giúp thanh toán nhanh chóng hơn</p>
+            </div>
+          </div>
+
+          <div style="background:var(--paper); border:1px solid var(--mist); padding:1.8rem;">
+            <div id="userAddressesList">
+              <!-- Render danh sách địa chỉ -->
+            </div>
+
+            <!-- Form thêm địa chỉ mới -->
+            <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px dashed var(--mist);">
+              <h4 style="font-family:var(--font-serif); font-size:1.1rem; margin-bottom:1rem;">+ Thêm Địa Chỉ Nhận Hàng Mới</h4>
+              <form id="addNewAddressForm" style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                <div class="form-group">
+                  <label>Tên người nhận *</label>
+                  <input type="text" id="addrRecipient" class="form-input" placeholder="Nguyễn Văn A" required>
+                </div>
+                <div class="form-group">
+                  <label>Số điện thoại *</label>
+                  <input type="tel" id="addrPhone" class="form-input" placeholder="0901234567" required>
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                  <label>Địa chỉ chi tiết (Số nhà, tên đường, phường/xã, tỉnh/TP) *</label>
+                  <input type="text" id="addrStreet" class="form-input" placeholder="Số 123 Đường ABC, Xã XYZ..." required>
+                </div>
+                <div style="grid-column: span 2;">
+                  <button type="submit" class="btn-secondary" style="padding:0.7rem 1.5rem;">LƯU ĐỊA CHỈ NÀY</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: DATA PRIVACY (D1-D3) -->
+        <div id="accountTabPrivacy" style="display:none;">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Quyền Dữ Liệu Cá Nhân</h1>
+              <p class="page-main-sub">Minh bạch và tuân thủ các quy định bảo vệ quyền riêng tư người tiêu dùng (NĐ 13/2023/NĐ-CP & NĐ 356)</p>
+            </div>
+          </div>
+
+          <div style="display:grid; gap:1.5rem;">
+            <!-- Xuất dữ liệu cá nhân (D2) -->
+            <div style="background:var(--paper); border:1px solid var(--mist); padding:1.8rem;">
+              <h3 style="font-family:var(--font-serif); font-size:1.15rem; margin-bottom:0.5rem;">
+                1. Tải Về Dữ Liệu Của Tôi (D2)
+              </h3>
+              <p style="font-size:0.85rem; color:#666; margin-bottom:1.2rem; line-height:1.6;">
+                Bạn có toàn quyền tải về một bản sao lưu toàn bộ thông tin tài khoản, sổ địa chỉ và lịch sử giao dịch dưới định dạng tệp chuẩn JSON.
+              </p>
+              <button type="button" class="btn-secondary" id="btnExportUserData">
+                ⬇ TẢI VỀ FILE DỮ LIỆU CÁ NHÂN (.JSON)
+              </button>
+            </div>
+
+            <!-- Rút lại đồng ý (D1) -->
+            <div style="background:var(--paper); border:1px solid var(--mist); padding:1.8rem;">
+              <h3 style="font-family:var(--font-serif); font-size:1.15rem; margin-bottom:0.5rem;">
+                2. Quản Lý Đồng Ý Nhận Tin & Tiếp Thị (D1)
+              </h3>
+              <p style="font-size:0.85rem; color:#666; margin-bottom:1.2rem; line-height:1.6;">
+                Bạn có thể rút lại sự đồng ý nhận email thông tin mùa thu hoạch hoặc chương trình ưu đãi của Tổ Vàng bất cứ lúc nào.
+              </p>
+              <button type="button" class="btn-secondary" id="btnRevokeMarketing">
+                RÚT LẠI ĐỒNG Ý NHẬN TIN QUẢNG CÁO
+              </button>
+            </div>
+
+            <!-- Xóa tài khoản (D3) -->
+            <div style="background:var(--paper); border:1px solid #ffcdd2; padding:1.8rem;">
+              <h3 style="font-family:var(--font-serif); font-size:1.15rem; color:var(--rust); margin-bottom:0.5rem;">
+                3. Yêu Cầu Xóa / Ẩn Danh Hóa Tài Khoản (D3)
+              </h3>
+              <p style="font-size:0.85rem; color:#666; margin-bottom:1.2rem; line-height:1.6;">
+                Khi gửi yêu cầu xóa tài khoản, toàn bộ thông tin cá nhân của bạn sẽ được ẩn danh hóa vĩnh viễn theo đúng quy chuẩn pháp lý.
+              </p>
+              <button type="button" class="btn-small btn-small-danger" id="btnRequestDeleteAccount">
+                GỬI YÊU CẦU XÓA TÀI KHOẢN
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- VIETQR MODAL (C5) -->
+  <div class="modal-overlay" id="vietqrModal" role="dialog" aria-modal="true" aria-labelledby="modalVietqrTitle">
+    <div class="modal-box" style="max-width: 500px; text-align: center;">
+      <button class="modal-close-btn" id="btnCloseVietqrModal" aria-label="Đóng">[ ĐÓNG ]</button>
+      <h3 class="modal-title" id="modalVietqrTitle" style="color:var(--gold);">Mã Chuyển Khoản VietQR</h3>
+      <p class="modal-sub">Quét mã bằng ứng dụng ngân hàng bất kỳ để thanh toán chính xác</p>
+
+      <div class="vietqr-wrap" style="margin: 1.5rem auto;">
+        <img id="vietqrImg" src="" alt="Mã thanh toán VietQR" style="max-width:280px; width:100%; border:2px solid var(--mist); background:#fff; padding:0.5rem;">
+      </div>
+
+      <div class="vietqr-info-table" style="text-align: left; background: var(--cream); padding: 1rem; border: 1px solid var(--mist); font-size: 0.85rem; margin-bottom: 1.5rem;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+          <span style="color:#777;">Ngân hàng:</span>
+          <strong id="qrBankName">Vietcombank (VCB)</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+          <span style="color:#777;">Số tài khoản:</span>
+          <strong id="qrAccountNo" style="font-family:var(--font-mono); font-size:0.95rem; color:var(--rust);">—</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+          <span style="color:#777;">Chủ tài khoản:</span>
+          <strong id="qrAccountName">—</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+          <span style="color:#777;">Số tiền thanh toán:</span>
+          <strong id="qrAmount" style="color:var(--gold); font-size:1.05rem;">—</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <span style="color:#777;">Nội dung chuyển khoản:</span>
+          <strong id="qrMemo" style="font-family:var(--font-mono); color:var(--dark); background:#fff; padding:0.1rem 0.4rem; border:1px dashed var(--mist);">—</strong>
+        </div>
+      </div>
+
+      <button type="button" class="btn-primary" id="btnDoneVietqr" style="width: 100%;">
+        TÔI ĐÃ CHUYỂN KHOẢN XONG
+      </button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/account.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await window.TovangApi.checkAuth();
+      if (!user) {
+        document.getElementById('accountAuthGuard').style.display = 'block';
+        document.getElementById('accountMainLayout').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('accountUserNameDisplay').textContent = user.full_name;
+
+      // Sidebar Tab Switching
+      document.querySelectorAll('.admin-nav-item[data-tab]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.admin-nav-item[data-tab]').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const tab = btn.getAttribute('data-tab');
+
+          document.getElementById('accountTabOrders').style.display = tab === 'orders' ? 'block' : 'none';
+          document.getElementById('accountTabProfile').style.display = tab === 'profile' ? 'block' : 'none';
+          document.getElementById('accountTabAddresses').style.display = tab === 'addresses' ? 'block' : 'none';
+          document.getElementById('accountTabPrivacy').style.display = tab === 'privacy' ? 'block' : 'none';
+
+          if (tab === 'orders') window.TovangAccount?.loadUserOrders();
+          if (tab === 'profile' || tab === 'addresses') window.TovangAccount?.loadUserProfileAndAddresses();
+        });
+      });
+
+      // Handle Hash in URL (e.g. account.html#profile)
+      const hash = window.location.hash.replace('#', '');
+      if (hash && ['orders', 'profile', 'addresses', 'privacy'].includes(hash)) {
+        document.querySelector(`.admin-nav-item[data-tab="${hash}"]`)?.click();
+      } else {
+        window.TovangAccount?.loadUserOrders();
+      }
+
+      document.getElementById('btnPageLogout')?.addEventListener('click', async () => {
+        await window.TovangAuth?.logout();
+        window.location.href = 'index.html';
+      });
+
+      // Close VietQR Modal
+      document.getElementById('btnCloseVietqrModal')?.addEventListener('click', () => {
+        document.getElementById('vietqrModal')?.classList.remove('active');
+      });
+      document.getElementById('btnDoneVietqr')?.addEventListener('click', () => {
+        document.getElementById('vietqrModal')?.classList.remove('active');
+        window.TovangAccount?.loadUserOrders();
+      });
+
+      // Add address form
+      document.getElementById('addNewAddressForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try {
+          const recipient_name = document.getElementById('addrRecipient').value.trim();
+          const phone = document.getElementById('addrPhone').value.trim();
+          const street_address = document.getElementById('addrStreet').value.trim();
+
+          const res = await window.TovangApi.post('/api/v1/users/addresses', {
+            recipient_name,
+            phone,
+            street_address,
+            province: 'Toàn quốc',
+            is_default: false
+          });
+
+          window.TovangApi.showToast('Đã thêm địa chỉ mới thành công!', 'success');
+          e.target.reset();
+          window.TovangAccount?.loadUserProfileAndAddresses();
+        } catch (err) {
+          window.TovangApi.showToast('Lỗi: ' + err.message, 'error');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
