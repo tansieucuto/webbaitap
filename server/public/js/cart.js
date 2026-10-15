@@ -1,6 +1,7 @@
 /**
  * TỔ VÀNG — CART.JS
  * Quản lý Giỏ Hàng Toàn Diện: Đồng Bộ LocalStorage + Backend API v1, Drawer & Trang Giỏ Hàng
+ * Drawer được TỰ TẠO trên mọi trang (trừ cart.html) → trải nghiệm thống nhất toàn site.
  */
 
 (function () {
@@ -65,23 +66,11 @@
     try {
       const res = await api.get('/api/v1/cart');
       if (res && res.success && res.data && Array.isArray(res.data.items)) {
-        if (res.data.items.length > 0) {
-          cartData = res.data;
-          saveToStorage();
-        } else if (cartData.items && cartData.items.length > 0) {
-          // Server trống nhưng local có sản phẩm: đồng bộ các món từ local lên server
-          for (const it of cartData.items) {
-            try {
-              await api.post('/api/v1/cart/items', {
-                variant_id: it.variant_id,
-                quantity: it.quantity
-              });
-            } catch (_) {}
-          }
-        } else {
-          cartData = res.data;
-          saveToStorage();
-        }
+        // Server là nguồn sự thật duy nhất cho giỏ hàng.
+        // KHÔNG đồng bộ ngược local → server: sau khi đặt đơn server xóa giỏ,
+        // nhưng localStorage cũ còn món → sẽ bị thêm lại sai vào giỏ.
+        cartData = res.data;
+        saveToStorage();
       }
     } catch (err) {
       console.warn('Backend chưa sẵn sàng, dùng giỏ hàng offline cache:', err.message);
@@ -278,6 +267,38 @@
     window.dispatchEvent(new CustomEvent('tovang_cart_updated', { detail: cartData }));
   }
 
+  // Tự tạo khung Drawer nếu trang chưa có (đồng nhất toàn site, trừ trang cart.html)
+  function ensureCartDrawer() {
+    if (window.location.pathname.endsWith('cart.html')) return;
+    if (document.getElementById('cartDrawerOverlay')) return;
+
+    document.body.insertAdjacentHTML('beforeend', `
+      <div class="cart-drawer-overlay" id="cartDrawerOverlay">
+        <div class="cart-drawer">
+          <div class="cart-header">
+            <h3>Giỏ Hàng</h3>
+            <button class="modal-close-btn" id="btnCloseCartDrawer" style="position: static;" aria-label="Đóng">[ ĐÓNG ]</button>
+          </div>
+          <div class="cart-body" id="cartDrawerBody"></div>
+          <div class="cart-footer">
+            <div class="cart-shipping-bar">
+              <div class="cart-shipping-progress" id="cartShippingProgress"></div>
+            </div>
+            <div class="cart-shipping-text" id="cartShippingNotice">
+              Mua thêm 500.000đ để được miễn phí vận chuyển
+            </div>
+            <div class="cart-subtotal-row">
+              <span>Tổng Cộng</span>
+              <span class="cart-subtotal-price" id="cartSubtotal">0đ</span>
+            </div>
+            <button class="btn-checkout" id="btnCheckout">Tiến Hành Đặt Hàng</button>
+            <a href="cart.html" style="display:block; text-align:center; margin-top:0.6rem; padding:0.75rem; border:1px solid rgba(201,168,76,0.35); font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--cream); text-decoration:none; background:rgba(20,16,12,0.85); transition:all 0.2s;">Xem Chi Tiết Trang Giỏ Hàng →</a>
+          </div>
+        </div>
+      </div>
+    `);
+  }
+
   function openCart() {
     const overlay = document.getElementById('cartDrawerOverlay');
     if (overlay) {
@@ -298,6 +319,8 @@
   }
 
   function setupCartUI() {
+    ensureCartDrawer();
+
     const openBtn = document.getElementById('btnNavCart');
     const closeBtn = document.getElementById('btnCloseCartDrawer');
     const overlay = document.getElementById('cartDrawerOverlay');
@@ -310,7 +333,6 @@
     if (openBtn) {
       openBtn.addEventListener('click', (e) => {
         if (isCartPage) {
-          // Đang ở cart.html rồi
           return;
         }
         if (overlay) {
@@ -319,7 +341,6 @@
           openCart();
           loadCart();
         }
-        // Nếu không có overlay thì để link tự nhiên dẫn về cart.html
       });
     }
 
@@ -346,9 +367,13 @@
           return;
         }
 
-        // Mở Checkout Modal
         closeCart();
-        window.TovangCheckout?.openCheckout(cartData);
+        // Trang có modal checkout (index) → mở modal; trang khác → sang trang thanh toán
+        if (window.TovangCheckout?.openCheckout) {
+          window.TovangCheckout.openCheckout(cartData);
+        } else {
+          window.location.href = 'checkout.html';
+        }
       });
     }
   }

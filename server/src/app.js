@@ -9,6 +9,7 @@ const sessionMiddleware = require('./middleware/session');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
+app.set('trust proxy', 1);
 
 // 1. Cấu hình bảo mật HTTP headers (nới lỏng CSP cho Google Fonts, CDN & ảnh VietQR)
 app.use(
@@ -56,10 +57,12 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/api/v1/auth', require('./routes/auth.routes'));
 app.use('/api/v1/products', require('./routes/product.routes'));
 app.use('/api/v1/products/:slug/reviews', require('./routes/review.routes'));
+app.use('/api/v1/reviews', require('./routes/review.routes'));
 app.use('/api/v1/cart', require('./routes/cart.routes'));
 app.use('/api/v1/orders', require('./routes/order.routes'));
 app.use('/api/v1/users', require('./routes/user.routes'));
 app.use('/api/v1/admin', require('./routes/admin.routes'));
+app.use('/api/v1/payments', require('./routes/payment.routes'));
 
 // Route kiểm tra sức khoẻ server
 app.get('/health', (req, res) => {

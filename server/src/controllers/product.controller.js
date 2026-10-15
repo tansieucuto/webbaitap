@@ -124,13 +124,20 @@ exports.listProducts = async (req, res, next) => {
   try {
     const [products] = await pool.query('SELECT * FROM products WHERE is_active = TRUE ORDER BY id ASC');
     
-    // Nạp kèm biến thể và hình ảnh cho từng sản phẩm
+    // Nạp kèm biến thể, hình ảnh và điểm đánh giá đã duyệt cho từng sản phẩm
     for (let p of products) {
       const [variants] = await pool.query('SELECT * FROM product_variants WHERE product_id = ? AND is_active = TRUE ORDER BY sort_order ASC', [p.id]);
       const [images] = await pool.query('SELECT * FROM product_images WHERE product_id = ? ORDER BY sort_order ASC', [p.id]);
+      const [[rating]] = await pool.query(
+        `SELECT ROUND(AVG(rating), 1) AS average_rating, COUNT(*) AS review_count
+         FROM reviews WHERE product_id = ? AND is_approved = TRUE`,
+        [p.id]
+      );
       p.variants = variants;
       p.images = images;
       p.primary_image = images.find(img => img.is_primary)?.url || images[0]?.url || 'assets/images/honey-forest-wide.jpg';
+      p.average_rating = rating.average_rating !== null ? Number(rating.average_rating) : null;
+      p.review_count = Number(rating.review_count) || 0;
     }
 
     res.json({ success: true, data: products });
@@ -159,16 +166,24 @@ exports.getProduct = async (req, res, next) => {
     product.images = images;
     product.primary_image = images.find(img => img.is_primary)?.url || images[0]?.url || 'assets/images/honey-forest-wide.jpg';
 
-    // Đánh giá
+    // Đánh giá (công khai chỉ hiển thị đánh giá đã duyệt)
     const [reviews] = await pool.query(
       `SELECT r.*, u.full_name as author_name
        FROM reviews r
        LEFT JOIN users u ON r.user_id = u.id
-       WHERE r.product_id = ?
+       WHERE r.product_id = ? AND r.is_approved = TRUE
        ORDER BY r.created_at DESC LIMIT 10`,
       [product.id]
     );
     product.recent_reviews = reviews;
+
+    const [[rating]] = await pool.query(
+      `SELECT ROUND(AVG(rating), 1) AS average_rating, COUNT(*) AS review_count
+       FROM reviews WHERE product_id = ? AND is_approved = TRUE`,
+      [product.id]
+    );
+    product.average_rating = rating.average_rating !== null ? Number(rating.average_rating) : null;
+    product.review_count = Number(rating.review_count) || 0;
 
     res.json({ success: true, data: product });
   } catch (error) {

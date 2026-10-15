@@ -17,8 +17,6 @@
 <body>
 
   <!-- NAVIGATION -->
-
-  <!-- NAVIGATION -->
   <nav>
     <a href="index.html" class="nav-logo">Tổ<span>Vàng</span></a>
     <ul class="nav-links" id="navLinks">
@@ -33,7 +31,7 @@
 
   <!-- MAIN CONTAINER -->
   <main class="site-page-container" style="max-width: 800px;">
-    
+
     <div class="order-success-card" id="successBox">
       <div style="font-size:3rem; color:#4caf50; margin-bottom:0.5rem;">✓</div>
       <h1 style="font-family:var(--font-serif); font-size:2rem; color:var(--ink); margin-bottom:0.4rem;">
@@ -138,6 +136,7 @@
       await window.TovangApi.checkAuth();
       const params = new URLSearchParams(window.location.search);
       const code = params.get('code');
+      const token = params.get('token') || '';
 
       if (!code) {
         window.location.href = 'index.html';
@@ -146,29 +145,34 @@
 
       document.getElementById('displayOrderCode').textContent = code;
 
+      if (params.get('failed')) {
+        window.TovangApi.showToast('Giao dịch VNPay chưa hoàn tất — đơn hàng vẫn đang chờ thanh toán.', 'info', 6000);
+      }
+
       try {
-        const res = await window.TovangApi.get(`/api/v1/orders/${code}`);
+        const res = await window.TovangApi.get(`/api/v1/orders/${code}` + (token ? `?token=${encodeURIComponent(token)}` : ''));
         if (!res.success || !res.data) return;
 
         const o = res.data;
         document.getElementById('orderRecipient').textContent = o.recipient_name;
         document.getElementById('orderPhoneDisplay').textContent = o.phone;
         document.getElementById('orderAddressDisplay').textContent = o.full_address;
-        
+
         const methodNames = {
           cod: 'Thanh toán tiền mặt khi nhận hàng (COD)',
           bank_transfer: 'Chuyển khoản VietQR',
           vnpay: 'Cổng thanh toán VNPay'
         };
         document.getElementById('orderPaymentMethodDisplay').textContent = methodNames[o.payment_method] || o.payment_method;
-        
+
         const statusNames = {
-          pending_payment: 'Chờ thanh toán qua VietQR',
+          pending_payment: 'Chờ thanh toán',
           pending_confirmation: 'Chờ xác nhận đơn hàng',
           confirmed: '✓ Đã thanh toán & Đã xác nhận',
           shipping: 'Đang vận chuyển',
           delivered: 'Giao hàng thành công',
-          cancelled: 'Đã hủy đơn hàng'
+          cancelled: 'Đã hủy đơn hàng',
+          expired: 'Hết hạn thanh toán'
         };
 
         const stBadge = document.getElementById('orderStatusDisplay');

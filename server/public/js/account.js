@@ -16,7 +16,8 @@
     delivered: 'Đã giao thành công',
     delivery_failed: 'Giao thất bại',
     cancelled: 'Đã hủy',
-    refunded: 'Đã hoàn tiền'
+    refunded: 'Đã hoàn tiền',
+    expired: 'Hết hạn thanh toán'
   };
 
   async function openOrders() {
@@ -84,6 +85,7 @@
 
         const canCancel = ['pending_payment', 'pending_confirmation', 'confirmed'].includes(order.status);
         const hasVietQR = order.payment_method === 'bank_transfer' && order.status === 'pending_payment';
+        const hasVnpay = order.payment_method === 'vnpay' && order.status === 'pending_payment';
         const isDelivered = order.status === 'delivered';
 
         let itemsHtml = '';
@@ -124,6 +126,10 @@
                 <button type="button" class="btn-small btn-view-vietqr" data-code="${order.order_code}">
                   Xem QR Chuyển Khoản
                 </button>` : ''}
+              ${hasVnpay ? `
+                <button type="button" class="btn-small btn-pay-again" data-code="${order.order_code}">
+                  Thanh Toán Lại (VNPay)
+                </button>` : ''}
 
               ${isDelivered ? `
                 <button type="button" class="btn-small" onclick="window.TovangReviews?.openModal();">
@@ -163,25 +169,77 @@
         });
       });
 
-      // Sự kiện nút xem VietQR
+      // Sự kiện nút "Thanh Toán Lại" cho đơn VNPay — sinh URL VNPay mới rồi chuyển sang cổng
+      container.querySelectorAll('.btn-pay-again').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const code = btn.getAttribute('data-code');
+          try {
+            btn.disabled = true;
+            btn.textContent = 'ĐANG MỞ CỔNG THANH TOÁN...';
+            const res = await api.post(`/api/v1/orders/${code}/pay-again`, {});
+            if (res.success && res.data && res.data.payment_url) {
+              window.location.href = res.data.payment_url;
+            } else {
+              throw new Error('Không mở được cổng thanh toán.');
+            }
+          } catch (err) {
+            api.showToast(err.message, 'error');
+            btn.disabled = false;
+            btn.textContent = 'Thanh Toán Lại (VNPay)';
+          }
+        });
+      });
+
+           // Sự kiện nút xem VietQR — dùng modal có sẵn trên trang tài khoản
       container.querySelectorAll('.btn-view-vietqr').forEach(btn => {
         btn.addEventListener('click', async () => {
           const code = btn.getAttribute('data-code');
           try {
             const orderRes = await api.get(`/api/v1/orders/${code}`);
-            if (orderRes.success && orderRes.data) {
-              window.TovangCheckout?.openOrderConfirmation({
-                orderCode: orderRes.data.order_code,
-                total: orderRes.data.total,
-                paymentMethod: 'bank_transfer',
-                bankDetails: orderRes.data.bankDetails
-              });
+            if (!orderRes.success || !orderRes.data) return;
+            const bd = orderRes.data.bankDetails;
+            const modal = document.getElementById('vietqrModal');
+            if (!modal || !bd) {
+              api.showToast('Không lấy được thông tin chuyển khoản.', 'error');
+              return;
             }
+            modal.dataset.orderCode = code;
+            document.getElementById('vietqrImg').src = bd.qrUrl;
+            document.getElementById('qrBankName').textContent = bd.bankName;
+            document.getElementById('qrAccountNo').textContent = bd.accountNumber;
+            document.getElementById('qrAccountName').textContent = bd.accountName;
+            document.getElementById('qrAmount').textContent = api.formatMoney(bd.amount);
+            document.getElementById('qrMemo').textContent = bd.memo;
+            modal.classList.add('active');
           } catch (err) {
             api.showToast(err.message, 'error');
           }
         });
       });
+
+      // Nút giả lập thanh toán QR (demo) — gắn một lần, tránh trùng listener
+      const demoQrBtn = document.getElementById('btnDemoPayVietqr');
+      if (demoQrBtn && !demoQrBtn.dataset.bound) {
+        demoQrBtn.dataset.bound = '1';
+        demoQrBtn.addEventListener('click', async () => {
+          const modal = document.getElementById('vietqrModal');
+          const code = modal?.dataset.orderCode;
+          if (!code) return;
+          try {
+            demoQrBtn.disabled = true;
+            demoQrBtn.textContent = 'ĐANG XÁC NHẬN THANH TOÁN...';
+            const res = await api.post(`/api/v1/orders/${code}/demo-pay`, {});
+            api.showToast(res.message || '⚡ [DEMO] Đã giả lập thanh toán thành công!', 'success');
+            modal.classList.remove('active');
+            loadUserOrders();
+          } catch (err) {
+            api.showToast(err.message, 'error');
+          } finally {
+            demoQrBtn.disabled = false;
+            demoQrBtn.textContent = '⚡ [DEMO] Giả Lập Đã Quét QR & Thanh Toán Thành Công';
+          }
+        });
+      }
 
     } catch (err) {
       container.innerHTML = `<div style="color:var(--rust); font-family:var(--font-mono); padding:1.5rem; text-align:center;">Lỗi nạp đơn hàng: ${err.message}</div>`;
@@ -275,6 +333,38 @@
         api.checkAuth();
       } catch (err) {
         api.showToast(err.message, 'error');
+      }
+    });
+
+    // Đổi mật khẩu
+    const changePwForm = document.getElementById('userChangePasswordForm');
+    changePwForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const current_password = document.getElementById('profileCurrentPassword').value;
+      const new_password = document.getElementById('profileNewPassword').value;
+      const confirm_password = document.getElementById('profileConfirmPassword').value;
+
+      if (new_password !== confirm_password) {
+        api.showToast('Mật khẩu xác nhận không khớp với mật khẩu mới.', 'error');
+        return;
+      }
+      if (new_password.length < 8 || !/[A-Za-z]/.test(new_password) || !/\d/.test(new_password)) {
+        api.showToast('Mật khẩu mới phải từ 8 ký tự, gồm cả chữ và số.', 'error');
+        return;
+      }
+
+      const submitBtn = changePwForm.querySelector('button[type="submit"]');
+      try {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'ĐANG CẬP NHẬT...';
+        const res = await api.patch('/api/v1/users/password', { current_password, new_password });
+        api.showToast(res.message || 'Đổi mật khẩu thành công!', 'success');
+        changePwForm.reset();
+      } catch (err) {
+        api.showToast(err.message, 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'CẬP NHẬT MẬT KHẨU';
       }
     });
 

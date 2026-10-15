@@ -49,7 +49,7 @@
     </div>
 
     <!-- Auth Guard Notice if not logged in -->
-    <div id="checkoutAuthNotice" style="display:none; background:#fffcf8; border:1px solid var(--gold); padding:1rem 1.5rem; margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+    <div id="checkoutAuthNotice" style="display:none; background:#fffcf8; border:1px solid var(--gold); padding:1rem 1.5rem; margin-bottom:2rem; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
       <div>
         <strong style="color:var(--rust);">Bạn chưa đăng nhập tài khoản?</strong>
         <div style="font-size:0.85rem; color:#666;">Đăng nhập để tự động điền sổ địa chỉ và tích lũy đơn hàng của bạn.</div>
@@ -59,7 +59,7 @@
 
     <form id="standaloneCheckoutForm">
       <div class="checkout-page-layout">
-        
+
         <!-- LEFT COLUMN: Address & Payment Methods -->
         <div>
           <!-- Address Section -->
@@ -187,6 +187,7 @@
       if (!user) {
         document.getElementById('checkoutAuthNotice').style.display = 'flex';
       } else {
+        document.getElementById('checkoutAuthNotice').style.display = 'none';
         // Điền trước thông tin user
         const nameInput = document.getElementById('orderRecipientName');
         const phoneInput = document.getElementById('orderPhone');
@@ -323,8 +324,14 @@
         if (res.success && res.data) {
           const order = res.data;
           window.TovangApi.showToast('Đặt hàng thành công!', 'success');
-          // Chuyển hướng sang trang xác nhận đơn hàng
-          window.location.href = `order-success.html?code=${order.order_code}`;
+
+          if (order.payment_url) {
+            // Đơn VNPay → chuyển thẳng sang cổng thanh toán
+            window.location.href = order.payment_url;
+          } else {
+            // COD / VietQR → sang trang xác nhận đơn (kèm token chống IDOR)
+            window.location.href = `order-success.html?code=${order.order_code}&token=${order.access_token}`;
+          }
         }
       } catch (err) {
         submitBtn.disabled = false;

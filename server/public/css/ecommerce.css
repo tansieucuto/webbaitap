@@ -712,7 +712,7 @@ body.has-demo-banner nav {
 }
 
 .page-breadcrumb a {
-  color: var(--ink);
+  color: var(--cream);
   text-decoration: underline;
 }
 
@@ -730,14 +730,14 @@ body.has-demo-banner nav {
 .page-main-title {
   font-family: var(--font-serif);
   font-size: 2.2rem;
-  color: var(--ink);
+  color: var(--cream);
   line-height: 1.2;
 }
 
 .page-main-sub {
   font-family: var(--font-sans);
   font-size: 0.95rem;
-  color: #666;
+  color: #b3a99c;
   margin-top: 0.4rem;
 }
 
@@ -879,3 +879,55 @@ body.has-demo-banner nav {
     position: static;
   }
 }
+
+/* ==========================================================================
+   TỔ VÀNG FIX — bổ sung cuối file
+   1) Thẻ hero cao 0px khi lưới chỉ có 1 sản phẩm → cho tỉ lệ riêng
+   2) Tiêu đề/mô tả/breadcrumb trang nền tối bị chữ mực đen → đổi màu sáng
+   3) Trang admin nền sáng bị chữ kem (vô hình) → trả về màu mực
+   ========================================================================== */
+
+/* 1. Hero card luôn có chiều cao kể cả đứng một mình trong lưới */
+.product-card.product-hero {
+  aspect-ratio: 16 / 9;
+  min-height: 320px;
+}
+
+/* 2. Các trang nền tối (cửa hàng / giỏ hàng / thanh toán / tài khoản) */
+.page-main-title { color: var(--cream); }
+.page-main-sub { color: #b3a99c; }
+.page-breadcrumb a { color: var(--cream); }
+
+/* 3. Admin nền sáng — độ ưu tiên cao hơn nhờ #id nên ghi đè mục 2 */
+#adminMainLayout { color: var(--ink); }
+#adminMainLayout .page-main-title { color: var(--ink); }
+#adminMainLayout .page-main-sub { color: #666; }
+#adminMainLayout .admin-stat-hint { color: #7a7268; font-size: 0.72rem; margin-top: 0.3rem; }
+
+/* ==========================================================================
+   TỔ VÀNG FIX 2 — Giỏ hàng / Thanh toán / Tài khoản
+   Bản server/public bị đổi các hộp từ nền tối sang nền giấy sáng nhưng giữ
+   chữ màu sáng → chìm. Lấy lại màu đúng từ bản client.
+   ========================================================================== */
+
+/* 1. Giỏ hàng — header bảng: nền nâu tối + chữ vàng (đúng thiết kế gốc) */
+.cart-items-table th {
+  background: #271f17;
+  color: var(--gold);
+}
+
+/* 2. Giỏ hàng — hộp "Tóm Tắt Đơn Hàng" về nền tối, chữ sáng inline hiện đúng */
+.cart-page-layout .cart-summary-box {
+  background: #201913;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 4px;
+}
+
+/* 3. Thanh toán — hộp tóm tắt giữ nền sáng, nhưng chữ đang thừa hưởng màu kem → trả về mực */
+.checkout-page-layout .cart-summary-box {
+  color: var(--ink);
+}
+
+/* 4. Tài khoản — thẻ đơn hàng & sổ địa chỉ nền sáng bị chữ kem thừa hưởng → mực */
+.order-card { color: var(--ink); }
+#addressBookList > div { color: var(--ink); }

@@ -162,6 +162,11 @@
   function openOrderConfirmation(orderData) {
     const modal = document.getElementById('orderConfirmationModal');
     if (!modal) return;
+        // Đơn VNPay: chuyển thẳng sang cổng thanh toán
+    if (orderData.paymentMethod === 'vnpay' && orderData.payment_url) {
+      window.location.href = orderData.payment_url;
+      return;
+    }
 
     document.getElementById('confirmOrderCode').textContent = orderData.orderCode;
     document.getElementById('confirmOrderTotal').textContent = api.formatMoney(orderData.total);

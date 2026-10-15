@@ -1,10 +1,10 @@
 const app = require('./app');
 const config = require('./config/env');
 const pool = require('./config/db');
+const { startExpireOrdersJob } = require('./jobs/expireOrders');
 
 const startServer = async () => {
   try {
-    // Kiểm tra kết nối CSDL
     const connection = await pool.getConnection();
     console.log('✅ Kết nối cơ sở dữ liệu thành công.');
     connection.release();
@@ -13,6 +13,9 @@ const startServer = async () => {
       console.log(`🚀 Server đang chạy tại chế độ ${config.env} trên cổng ${config.port}`);
       console.log(`🔗 API Base URL: ${config.baseUrl}`);
     });
+
+    // Bật job nền: tự hủy đơn hết hạn thanh toán + hoàn kho
+    startExpireOrdersJob();
   } catch (error) {
     console.error('❌ Lỗi khởi động server:', error.message);
     process.exit(1);

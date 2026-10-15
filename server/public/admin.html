@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/responsive.css?v=2.0">
   <link rel="stylesheet" href="css/ecommerce.css?v=2.0">
   <style>
-    body { background: #f7f4ed; }
+      body { background: #f7f4ed; color: var(--ink); }}
     .admin-topbar {
       background: var(--ink);
       color: var(--cream);
@@ -74,7 +74,7 @@
 
   <!-- MAIN ADMIN CONTAINER -->
   <main class="site-page-container" style="margin-top: 2rem;">
-    
+
     <!-- Auth Guard Notice -->
     <div id="adminAuthGuard" style="display:none; text-align:center; padding: 4rem 1rem;">
       <h2 style="font-family:var(--font-serif); color:var(--rust); margin-bottom:1rem;">⚠️ Yêu Cầu Quyền Quản Trị</h2>
@@ -84,7 +84,7 @@
 
     <!-- Admin Content Layout -->
     <div class="admin-page-layout" id="adminMainLayout">
-      
+
       <!-- SIDEBAR -->
       <aside class="admin-sidebar">
         <div style="font-family:var(--font-mono); font-size:0.68rem; color:#888; text-transform:uppercase; letter-spacing:0.14em; margin-bottom:1rem; padding-left:0.5rem;">
@@ -101,6 +101,9 @@
         </button>
         <button type="button" class="admin-nav-item" data-tab="customers">
           <span>👥</span> <span>Khách Hàng</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="reviews">
+          <span>⭐</span> <span>Đánh Giá</span>
         </button>
         <button type="button" class="admin-nav-item" data-tab="audit">
           <span>🛡️</span> <span>Nhật Ký Kiểm Toán</span>
@@ -121,7 +124,7 @@
           </div>
 
           <!-- STATS CARDS -->
-          <div class="admin-stat-grid">
+          <div class="admin-stats-grid">
             <div class="admin-stat-card">
               <span class="admin-stat-label">Tổng Doanh Thu</span>
               <div class="admin-stat-value" id="adminTotalRev">0đ</div>
@@ -140,7 +143,17 @@
             <div class="admin-stat-card">
               <span class="admin-stat-label">Cảnh Báo Tồn Kho</span>
               <div class="admin-stat-value" id="adminLowStockCount" style="color:#d49a3d;">0</div>
-              <div class="admin-stat-hint">Biến thể có tồn kho &lt; 15 chai</div>
+              <div class="admin-stat-hint">Biến thể có tồn kho &le; 10</div>
+            </div>
+            <div class="admin-stat-card">
+              <span class="admin-stat-label">Khách Hàng</span>
+              <div class="admin-stat-value" id="adminCustomerCount">0</div>
+              <div class="admin-stat-hint">Tài khoản vai trò khách hàng</div>
+            </div>
+            <div class="admin-stat-card">
+              <span class="admin-stat-label">Đánh Giá Chờ Duyệt</span>
+              <div class="admin-stat-value" id="adminPendingReviewsCount" style="color:var(--gold);">0</div>
+              <div class="admin-stat-hint">Cần duyệt để hiển thị công khai</div>
             </div>
           </div>
 
@@ -206,22 +219,11 @@
                 <option value="confirmed">Đã xác nhận</option>
                 <option value="shipping">Đang giao</option>
                 <option value="delivered">Đã giao</option>
+                <option value="delivery_failed">Giao thất bại</option>
                 <option value="cancelled">Đã hủy</option>
+                <option value="expired">Hết hạn thanh toán</option>
+                <option value="refunded">Đã hoàn tiền</option>
               </select>
-            </div>
-          </div>
-
-          <div id="adminOrdersList">
-            <!-- Render danh sách đơn hàng chi tiết kèm nút xử lý -->
-          </div>
-        </div>
-
-        <!-- TAB 3: INVENTORY & PRODUCTS -->
-        <div id="adminTabInventory" style="display:none;">
-          <div class="page-header-box">
-            <div>
-              <h1 class="page-main-title">Kho Hàng & Biến Thể Sản Phẩm</h1>
-              <p class="page-main-sub">Cập nhật giá niêm yết và số lượng tồn kho trực tiếp vào cơ sở dữ liệu</p>
             </div>
           </div>
 
@@ -230,11 +232,42 @@
               <table class="admin-table">
                 <thead>
                   <tr>
+                    <th>Mã Đơn</th>
+                    <th>Khách Hàng</th>
                     <th>Sản Phẩm</th>
-                    <th>Quy Cách / SKU</th>
-                    <th>Đơn Giá (VND)</th>
-                    <th>Số Lượng Tồn</th>
+                    <th>Tổng Tiền</th>
                     <th>Trạng Thái</th>
+                    <th>Hành Động</th>
+                  </tr>
+                </thead>
+                <tbody id="adminOrdersTable">
+                  <tr><td colspan="6" style="text-align:center; padding:1.5rem;">Đang tải đơn hàng...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: INVENTORY & PRODUCTS -->
+        <div id="adminTabInventory" style="display:none;">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Kho Hàng & Biến Thể Sản Phẩm</h1>
+              <p class="page-main-sub">Cập nhật giá niêm yết, tồn kho trực tiếp vào cơ sở dữ liệu hoặc thêm sản phẩm mới</p>
+            </div>
+            <button type="button" class="btn-primary" id="btnOpenProductModal" style="padding:0.6rem 1.4rem;">＋ Thêm Sản Phẩm Mới</button>
+          </div>
+
+          <div style="background:var(--paper); border:1px solid var(--mist); padding:1.5rem;">
+            <div style="overflow-x:auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Sản Phẩm</th>
+                    <th>Quy Cách</th>
+                    <th>SKU</th>
+                    <th>Tồn Kho</th>
+                    <th>Đơn Giá (VND)</th>
                     <th>Hành Động</th>
                   </tr>
                 </thead>
@@ -276,7 +309,45 @@
           </div>
         </div>
 
-        <!-- TAB 5: AUDIT LOGS -->
+        <!-- TAB 5: REVIEWS -->
+        <div id="adminTabReviews" style="display:none;">
+          <div class="page-header-box">
+            <div>
+              <h1 class="page-main-title">Quản Lý Đánh Giá</h1>
+              <p class="page-main-sub">Duyệt hoặc ẩn đánh giá khách hàng trước khi hiển thị công khai trên cửa hàng</p>
+            </div>
+            <div style="display:flex; gap:0.6rem; align-items:center;">
+              <select id="adminReviewStatusSelect" class="form-select" style="width:180px; padding:0.5rem;">
+                <option value="">Tất cả</option>
+                <option value="pending">Chờ duyệt</option>
+                <option value="approved">Đã duyệt</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="background:var(--paper); border:1px solid var(--mist); padding:1.5rem;">
+            <div style="overflow-x:auto;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Sản Phẩm</th>
+                    <th>Khách Hàng</th>
+                    <th>Sao</th>
+                    <th>Nội Dung</th>
+                    <th>Ngày Gửi</th>
+                    <th>Trạng Thái</th>
+                    <th>Hành Động</th>
+                  </tr>
+                </thead>
+                <tbody id="adminReviewsTable">
+                  <tr><td colspan="7" style="text-align:center; padding:1.5rem;">Đang tải đánh giá...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 6: AUDIT LOGS -->
         <div id="adminTabAudit" style="display:none;">
           <div class="page-header-box">
             <div>
@@ -310,11 +381,93 @@
 
   </main>
 
+  <!-- MODAL THÊM SẢN PHẨM MỚI -->
+  <div id="adminProductModal" style="display:none; position:fixed; inset:0; background:rgba(13,12,10,0.65); z-index:1000; align-items:flex-start; justify-content:center; overflow-y:auto; padding:2rem 1rem;">
+    <div style="background:var(--paper,#fbf8f3); color:var(--ink,#1c1917); max-width:760px; width:100%; padding:2rem; border-radius:4px; box-shadow:0 24px 60px rgba(0,0,0,0.35);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem; border-bottom:1px solid var(--mist,#e5ddd0); padding-bottom:0.8rem;">
+        <h2 style="font-family:var(--font-serif,serif); font-size:1.3rem;">Thêm Sản Phẩm Mới</h2>
+        <button type="button" id="btnCloseProductModal" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:#888;">✕</button>
+      </div>
+
+      <form id="productForm">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem;">
+          <div style="grid-column:1/-1;">
+            <label style="font-size:0.75rem; font-weight:600;">Tên sản phẩm *</label>
+            <input type="text" id="prodNameInput" class="form-input" style="width:100%;" maxlength="255" required>
+          </div>
+          <div style="grid-column:1/-1;">
+            <label style="font-size:0.75rem; font-weight:600;">Mô tả ngắn</label>
+            <input type="text" id="prodShortDescInput" class="form-input" style="width:100%;">
+          </div>
+          <div style="grid-column:1/-1;">
+            <label style="font-size:0.75rem; font-weight:600;">Mô tả chi tiết</label>
+            <textarea id="prodDescInput" class="form-input" rows="3" style="width:100%;"></textarea>
+          </div>
+          <div>
+            <label style="font-size:0.75rem; font-weight:600;">Xuất xứ</label>
+            <input type="text" id="prodOriginInput" class="form-input" style="width:100%;" placeholder="vd: Vũ Quang, Hà Tĩnh">
+          </div>
+          <div>
+            <label style="font-size:0.75rem; font-weight:600;">Thành phần</label>
+            <input type="text" id="prodIngredientsInput" class="form-input" style="width:100%;" placeholder="vd: 100% mật ong rừng">
+          </div>
+          <div>
+            <label style="font-size:0.75rem; font-weight:600;">Hạn sử dụng</label>
+            <input type="text" id="prodShelfLifeInput" class="form-input" style="width:100%;" value="24 tháng">
+          </div>
+          <div>
+            <label style="font-size:0.75rem; font-weight:600;">Số tự công bố</label>
+            <input type="text" id="prodDeclarationInput" class="form-input" style="width:100%;" placeholder="vd: CB-1958-HT/2026">
+          </div>
+          <div style="grid-column:1/-1;">
+            <label style="font-size:0.75rem; font-weight:600;">Cảnh báo an toàn</label>
+            <input type="text" id="prodWarningInput" class="form-input" style="width:100%;" value="Không dùng cho trẻ em dưới 1 tuổi.">
+          </div>
+          <div style="grid-column:1/-1;">
+            <label style="font-size:0.75rem; font-weight:600;">Ảnh sản phẩm</label>
+            <div id="productImageDropzone" style="border:2px dashed #c8c0b2; border-radius:6px; padding:1.2rem; text-align:center; cursor:pointer; background:#fff; transition:all 0.15s;">
+              <div id="dropzoneHint" style="font-size:0.8rem; color:#7a7268;">
+                📷 Kéo &amp; thả ảnh vào đây hoặc <strong style="color:var(--rust);">bấm để chọn file</strong><br>
+                <span style="font-size:0.7rem;">JPG / PNG / WebP · tối đa 3MB</span>
+              </div>
+              <img id="productImagePreview" style="display:none; max-height:120px; margin:0 auto; border-radius:4px;" alt="Xem trước ảnh">
+            </div>
+            <input type="file" id="productImageFileInput" accept="image/jpeg,image/png,image/webp" style="display:none;">
+            <input type="text" id="prodImageInput" class="form-input" style="width:100%; margin-top:0.5rem;" placeholder="Hoặc dán đường dẫn ảnh, vd: assets/images/ten-anh.jpg">
+            <div id="productImageStatus" style="font-size:0.72rem; margin-top:0.3rem; display:none;"></div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.4rem; border-top:1px solid var(--mist,#e5ddd0); padding-top:1rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
+            <label style="font-size:0.8rem; font-weight:700;">Biến thể (dung tích / quy cách) *</label>
+            <button type="button" id="btnAddVariantRow" class="btn-small" style="cursor:pointer;">＋ Thêm biến thể</button>
+          </div>
+          <div id="productVariantsContainer"></div>
+        </div>
+
+        <div id="productFormMsg" class="form-message" style="display:none; margin-top:1rem;"></div>
+
+        <div style="display:flex; justify-content:flex-end; gap:0.8rem; margin-top:1.4rem;">
+          <button type="button" id="btnCancelProduct" style="background:none; border:1px solid #ccc; padding:0.6rem 1.2rem; cursor:pointer;">Hủy</button>
+          <button type="submit" id="btnSubmitProduct" class="btn-primary" style="padding:0.6rem 1.6rem;">LƯU SẢN PHẨM</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- SCRIPTS -->
   <script src="js/api.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/admin.js"></script>
   <script>
+    // Escape HTML — chống stored XSS khi render dữ liệu người dùng bằng innerHTML
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       const user = await window.TovangApi.checkAuth();
       if (!user || (user.role !== 'admin' && user.role !== 'staff')) {
@@ -331,17 +484,19 @@
           document.querySelectorAll('.admin-nav-item').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           const tab = btn.getAttribute('data-tab');
-          
+
           document.getElementById('adminTabDashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
           document.getElementById('adminTabOrders').style.display = tab === 'orders' ? 'block' : 'none';
           document.getElementById('adminTabInventory').style.display = tab === 'inventory' ? 'block' : 'none';
           document.getElementById('adminTabCustomers').style.display = tab === 'customers' ? 'block' : 'none';
+          document.getElementById('adminTabReviews').style.display = tab === 'reviews' ? 'block' : 'none';
           document.getElementById('adminTabAudit').style.display = tab === 'audit' ? 'block' : 'none';
 
           if (tab === 'dashboard') window.TovangAdmin?.loadAdminDashboard();
           if (tab === 'orders') window.TovangAdmin?.loadAdminOrders();
           if (tab === 'inventory') window.TovangAdmin?.loadAdminInventory();
           if (tab === 'customers') loadCustomersTab();
+          if (tab === 'reviews') window.TovangAdmin?.loadAdminReviews();
           if (tab === 'audit') loadAuditLogsTab();
         });
       });
@@ -373,23 +528,17 @@
           tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:1.2rem;">Chưa có khách hàng nào đăng ký.</td></tr>';
           return;
         }
-        let rows = '';
-        res.data.forEach(c => {
-          const dateStr = new Date(c.created_at).toLocaleDateString('vi-VN');
-          rows += `
-            <tr>
-              <td><strong>${c.full_name}</strong></td>
-              <td style="font-family:var(--font-mono);">${c.email}</td>
-              <td style="font-family:var(--font-mono);">${c.phone || 'Chưa cập nhật'}</td>
-              <td>${c.order_count} đơn</td>
-              <td style="font-weight:bold; color:var(--rust);">${window.TovangApi.formatMoney(c.total_spent)}</td>
-              <td>${dateStr}</td>
-            </tr>
-          `;
-        });
-        tbody.innerHTML = rows;
+        tbody.innerHTML = res.data.map(c => `
+          <tr>
+            <td><strong>${esc(c.full_name)}</strong></td>
+            <td style="font-family:var(--font-mono);">${esc(c.email)}</td>
+            <td style="font-family:var(--font-mono);">${esc(c.phone || 'Chưa cập nhật')}</td>
+            <td>${parseInt(c.order_count, 10) || 0} đơn</td>
+            <td style="font-weight:bold; color:var(--rust);">${window.TovangApi.formatMoney(c.total_spent)}</td>
+            <td>${c.created_at ? new Date(c.created_at).toLocaleDateString('vi-VN') : '—'}</td>
+          </tr>`).join('');
       } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="6" style="color:var(--rust); padding:1rem;">Lỗi tải dữ liệu: ${err.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" style="color:var(--rust); padding:1rem;">Lỗi tải dữ liệu: ${esc(err.message)}</td></tr>`;
       }
     }
 
@@ -403,28 +552,23 @@
           tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:1.2rem;">Chưa có bản ghi kiểm toán nào.</td></tr>';
           return;
         }
-        let rows = '';
-        res.data.forEach(log => {
-          const dateStr = new Date(log.created_at).toLocaleString('vi-VN');
+        tbody.innerHTML = res.data.map(log => {
           let detailsText = '';
           try {
-            detailsText = typeof log.details === 'object' ? JSON.stringify(log.details) : log.details;
-          } catch (_) {
-            detailsText = log.details || '';
-          }
-          rows += `
+            detailsText = typeof log.details === 'object' ? JSON.stringify(log.details) : (log.details || '');
+          } catch (_) { detailsText = ''; }
+          const dateStr = log.created_at ? new Date(log.created_at).toLocaleString('vi-VN') : '—';
+          return `
             <tr>
               <td style="font-family:var(--font-mono); font-size:0.75rem;">${dateStr}</td>
-              <td><span class="status-badge confirmed">${log.action}</span></td>
-              <td>${log.user_name || log.user_email || 'Hệ thống'}</td>
-              <td style="font-family:var(--font-mono); font-size:0.72rem; word-break:break-all;">${detailsText}</td>
-              <td style="font-family:var(--font-mono); font-size:0.75rem;">${log.ip_address || '—'}</td>
-            </tr>
-          `;
-        });
-        tbody.innerHTML = rows;
+              <td><span class="status-badge confirmed">${esc(log.action)}</span></td>
+              <td>${esc(log.user_name || log.user_email || 'Hệ thống')}</td>
+              <td style="font-family:var(--font-mono); font-size:0.72rem; word-break:break-all;">${esc(detailsText)}</td>
+              <td style="font-family:var(--font-mono); font-size:0.75rem;">${esc(log.ip_address || '—')}</td>
+            </tr>`;
+        }).join('');
       } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="5" style="color:var(--rust); padding:1rem;">Lỗi tải nhật ký: ${err.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" style="color:var(--rust); padding:1rem;">Lỗi tải nhật ký: ${esc(err.message)}</td></tr>`;
       }
     }
   </script>

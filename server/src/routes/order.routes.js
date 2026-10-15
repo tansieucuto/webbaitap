@@ -7,6 +7,7 @@ const { authenticate } = require('../middleware/auth');
 router.post('/', orderController.createOrder);
 router.get('/:orderCode', orderController.getOrder);
 router.post('/:orderCode/demo-pay', orderController.demoPay);
+router.post('/:orderCode/pay-again', authenticate, orderController.payAgain);
 
 // Các thao tác quản lý đơn cá nhân yêu cầu đăng nhập
 router.get('/', authenticate, orderController.listOrders);
